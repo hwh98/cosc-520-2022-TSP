@@ -3,6 +3,35 @@
 This repo is for the final project of COSP 520 2022 Winter Term 1. We are doing something about the Traveling Salesman Problem. 
 
 
+
+---
+### **The Dynamic Programming Algorithm for TSP**
+
+We define a graph $G = (V, E)$, a weighted undirected graph, then we consider the recursive table: 
+
+$$
+\begin{aligned}
+    C(S, i, j) := \min_{p\in \mathcal P}
+    \left\lbrace
+        |p|: p:(i \rightarrow j), \forall v \in S, v \in p
+    \right\rbrace, 
+\end{aligned}
+$$
+
+where it denotes the minimum length of the path going form the vertex $i$ to $j$ visiting every vertex in the set $S$. We define the basecase for all the $|S| = 2$, in which case we have: 
+
+$$
+\begin{aligned}
+    C(\{i, j\}, i, j) = c(i, j)\quad \forall i, j\in E, i\neq j, 
+\end{aligned}
+$$
+
+---
+#### **Subsets Generator**
+
+
+
+
 ---
 ### **Sources**
 

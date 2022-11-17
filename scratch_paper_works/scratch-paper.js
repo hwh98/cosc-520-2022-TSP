@@ -1,6 +1,5 @@
-
 (()=>{
-    
+
     var g = new jsgraphs.WeightedGraph(8);
 
     g.addEdge(new jsgraphs.Edge(0, 7, 0.16));
@@ -20,12 +19,14 @@
     g.addEdge(new jsgraphs.Edge(6, 0, 0.58));
     g.addEdge(new jsgraphs.Edge(6, 4, 0.93));
 
-    var kruskal = new jsgraphs.KruskalMST(g); 
-    var mst = kruskal.mst;
-    for(var i=0; i < mst.length; ++i) {
-        var e = mst[i];
-        var v = e.either();
-        var w = e.other(v);
+    let kruskal = new jsgraphs.KruskalMST(g); 
+    let mst = kruskal.mst;
+    for (let i = 0; i < mst.length; ++i) {
+        let e = mst[i];
+        let v = e.either();
+        let w = e.other(v);
         console.log('(' + v + ', ' + w + '): ' + e.weight);
-}
+    }
+    window.g = g;
+
 })();
