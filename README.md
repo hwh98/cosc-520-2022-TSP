@@ -9,3 +9,4 @@ This repo is for the final project of COSP 520 2022 Winter Term 1. We are doing 
 We make use of the 2 of the other repos to suppport our project: 
 1. JS graph algorithms: [here](https://github.com/chen0040/js-graph-algorithms)
 2. JS LP algorithm: [here](https://github.com/JWally/jsLPSolver)
+3. JS Graph And graph Algorithm: [here](https://github.com/dagrejs/graphlib/wiki#browser-scripts)
