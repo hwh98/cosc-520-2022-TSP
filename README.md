@@ -26,8 +26,15 @@ $$
 \end{aligned}
 $$
 
----
+And the main part of the algorithm started like: 
+
+* For $k = 3...N$ do: 
+  * For all $|S| = k, S \subseteq V$, DO: 
+    * $C(i, j, S) :=\min_{l \in S\setminus \{i, j\}}\{C(S\setminus \{j\}, i, l) + c(l, j)\}$
+
 #### **Subsets Generator**
+
+* Encode each of the subset of a set of size $n$ into an integer in $[0, 2^n]$. 
 
 
 
