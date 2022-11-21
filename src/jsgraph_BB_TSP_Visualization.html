@@ -54,18 +54,13 @@
                        color: '2980B9'
                     });
                 }
-                console.log(g.adj(0)[1])
 
                 // set up the solution
                 for(let i=0; i < bb_tour.length; ++i) {
-                    console.log(g)
                     //let e = mst[i];
                     let v = bb_tour[i][0];
                     let w = bb_tour[i][1];
                     let weight = g.edge(v,w).weight;
-                    console.log(v)
-                    console.log(w)
-                    //e.highlighted = true;
                     g.adj(v)[w-1].highlighted = true;
                     console.log('(' + v + ', ' + w + '): ' + weight);
                     mst_result.addEdge(w, v); // add the MST connected edge to MST graph.
