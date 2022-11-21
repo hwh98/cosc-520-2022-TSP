@@ -13,6 +13,8 @@
     
     <body>
         <h2>Traveling Salesmans Problem using Branch and Bound with Minimum Spanning Tree</h2>
+        <p id="t_cost">  </p>
+        <p id="exec_time">  </p>
         <div id="mynetwork"></div>
         
         <script type="text/javascript">
@@ -28,6 +30,8 @@
                 [bb_tour, tourcost] = branchandBound(g)
                 let endTime = performance.now()
                 console.log(`Call to doSomething took ${endTime - startTime} milliseconds`)
+                document.getElementById("t_cost").innerHTML = "The tour cost is " + tourcost;
+                document.getElementById("exec_time").innerHTML = "It takes " + (endTime - startTime) +" milliseconds to the solution";
 
                 // Visualization 
                 let g_nodes = [];
@@ -40,7 +44,6 @@
                        color: '2980B9'
                     });
                 }
-
                 // set up the visualizaiton of branch and bound solution
                 for(let i=0; i < bb_tour.length; ++i) {
                     //let e = mst[i];
