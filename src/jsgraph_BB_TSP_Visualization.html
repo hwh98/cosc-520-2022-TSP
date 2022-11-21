@@ -13,14 +13,18 @@
     
     <body>
         <h2>Traveling Salesmans Problem using Branch and Bound with Minimum Spanning Tree</h2>
+        <p>How many Vertex in the graph:</p>
+        <input type = "text" id="numofVertex" value = "6"/>
+        <br/>
+        <button onclick="creategraph()" id="numVertexbut">Generate the graph</button>
         <p id="t_cost">  </p>
         <p id="exec_time">  </p>
         <div id="mynetwork"></div>
         
         <script type="text/javascript">
-            (function(){
+            function runBB(){
                 let startTime = performance.now()
-                let numofvertex = 6;
+                let numofvertex = document.getElementById("numofVertex").value;
                 let g = new jsgraphs.WeightedGraph(numofvertex);
                 g = randomgraph(g, numofvertex)// generate random graph
 
@@ -91,7 +95,11 @@
                 let options = {};
                 let network = new vis.Network(container, data, options);
 
-            })();
+            };
+            function creategraph(){
+                alert("Create "+ document.getElementById("numofVertex").value + " Vertices")
+                runBB();
+            }
         </script>
     </body>
 </html>
