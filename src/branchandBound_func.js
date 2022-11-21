@@ -8,8 +8,9 @@ var numofvertex;//number of vertex
 // @param {bb_g} is a jsgraphs.WeightedGraph() object. It's the original graph for the branch and bound.
 // @return {glob_tour} is the tour solution of the TSP problem.
 // @returns {glob_loowerbound} is the cost of the solution.
+// @example 
 function branchandBound(bb_g){ //bb_g is the global original graph.
-    origin_g = cloneDeep(bb_g)
+    origin_g = _.cloneDeep(bb_g)
     numofvertex = bb_g.V;
 
     // MST
@@ -18,7 +19,7 @@ function branchandBound(bb_g){ //bb_g is the global original graph.
     let mst_result = new jsgraphs.Graph(bb_g.V);
     let mst_cost = 0;
     console.log("MST result - "+ mst.length+" edges generated in a " + bb_g.V +" vertexs graph.");
-    for(var i=0; i < mst.length; ++i) { // iterate the MST edge to create the MST graph
+    for(let i=0; i < mst.length; ++i) { // iterate the MST edge to create the MST graph
         var e = mst[i];
         var v = e.either();
         var w = e.other(v);
@@ -243,4 +244,4 @@ function findBranchVertex(branch_g){
 
 
 
-module.exports = {branchandBound, bbRecursion, istour, getTour, oneTreeMST, calculatetourcost, findBranchVertex}
+//module.exports = {branchandBound, bbRecursion, istour, getTour, oneTreeMST, calculatetourcost, findBranchVertex}
