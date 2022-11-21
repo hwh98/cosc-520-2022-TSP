@@ -4,13 +4,14 @@
  *  I can deal with it. 
  */
 
-const { isNull } = require("lodash");
+// const { isNull } = require("lodash");
 
 var TSPDPModule = (function (){
     
     console.log("Dynamic Programming module is being loaded");
     const THIS_MODULE = "[TSPDModule]: "
-    var DYNAMIC_TABLE = {};
+    var DYNAMIC_CTABLE = new WeakMap();
+    var DYNAMIC_PTABLE = new WeakMap();
     var BEST_SPANNING_PATH = null;
     var BEST_SPATH_LENGTH;
     var VERBOSE = false;
@@ -30,7 +31,7 @@ var TSPDPModule = (function (){
     function *k_combinatorics(n, k)
     {
         if (!Number.isInteger(n) || !Number.isInteger(k)) throw "n, k must be integer to use k_combinatorics fxn. ";
-        if (n <- k) throw " k > n and we have ${k} > ${n}. ";
+        if (n < k) throw `${THIS_MODULE} k > n and we have ${k} > ${n}.`;
         function *k_combinatorics_recur(a, k, start_at, already_chosen)
         {
             if (k == 0) {
@@ -87,23 +88,44 @@ var TSPDPModule = (function (){
 
     /**
      * Perform the dynamic programming approach to figure out the solution for a directed graph with edge weight assignment. 
-     * `c` is the maps that maps a 2 elements 
+     * `c` is the maps that maps a 2 elements. Take note that this method ONLY WORKS FOR DIRECTED GRAPH!
      * @param {object} c: c is a maps that maps an array of 2 elements to their edge costs. 
      */
     function tsp_dynamic(c)
     {
         if (!(typeof c === 'object')) throw `${THIS_MODULE} Please at least pass an object for the function: tsp_dynamic.`
 
-        DYNAMIC_TABLE = {}; // clear previous results! 
-        function construct_pair_distances()
+        DYNAMIC_CTABLE = {}; // clear previous results! 
+        
+        function prepare() // prepare the recursive basecase. 
         {
             for (const [k, v] of Object.entries(c)) 
             {
-                if (k !== v) DYNAMIC_TABLE[[k, v]] = c[[k, v]];
+                if (k !== v) 
+                {
+                    DYNAMIC_CTABLE[new Set([k, v])] = c[[k, v]]; 
+                    DYNAMIC_PTABLE[new Set([k, v])] = [k, v];
+
+                };
+            }
+            for (let item of new Set(Object.keys(c)))
+            {
+                DYNAMIC_CTABLE[item]
+            }
+            
+        }
+        prepare();
+        let all_vertices = new Set(Object.keys(c));
+        let n = all_vertices.length();
+        let gen = new SubsetGenerator(all_vertices);
+        for (let s = 3; s <= n; s++) 
+        {
+            let k_sub = gen.k_get(s);
+            for (let item = k_sub.next(); !item.done ; item = gen.next())
+            {
+
             }
         }
-        let all_vertices = new Set(Object.keys(c));
-        
         
 
         
