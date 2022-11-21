@@ -4,16 +4,28 @@
  *  I can deal with it. 
  */
 
-(()=>{
-    console.log("Dynamic Programming module is being loaded")
+const { isNull } = require("lodash");
 
-    const DYNAMIC_TABLE = {}
+var TSPDPModule = (function (){
+    
+    console.log("Dynamic Programming module is being loaded");
+    const THIS_MODULE = "[TSPDModule]: "
+    var DYNAMIC_TABLE = {};
+    var BEST_SPANNING_PATH = null;
+    var BEST_SPATH_LENGTH;
+    var VERBOSE = false;
+
+    
+    function println(str=null)
+    {
+        if (str === null && VERBOSE) console.log(str);
+    }
 
     /**
      * 
-     * @{param} {number} a : An array of uniqe elements to choose from. 
-     * @{param} {number} k : The size of the subsets that we want to choose from. 
-     * @{yield} {number}: A finger print encoding the choice of the subset. 
+     * @param {number} a : An array of uniqe elements to choose from. 
+     * @param {number} k : The size of the subsets that we want to choose from. 
+     * @yield {number}: A finger print encoding the choice of the subset. 
      */
     function *k_combinatorics(n, k)
     {
@@ -76,11 +88,27 @@
     /**
      * Perform the dynamic programming approach to figure out the solution for a directed graph with edge weight assignment. 
      * `c` is the maps that maps a 2 elements 
+     * @param {object} c: c is a maps that maps an array of 2 elements to their edge costs. 
      */
     function tsp_dynamic(c)
     {
+        if (!(typeof c === 'object')) throw `${THIS_MODULE} Please at least pass an object for the function: tsp_dynamic.`
 
-    }
+        DYNAMIC_TABLE = {}; // clear previous results! 
+        function construct_pair_distances()
+        {
+            for (const [k, v] of Object.entries(c)) 
+            {
+                if (k !== v) DYNAMIC_TABLE[[k, v]] = c[[k, v]];
+            }
+        }
+        let all_vertices = new Set(Object.keys(c));
+        
+        
+
+        
+    }; 
+
 
 //======================================================================================================================
     /**
@@ -111,10 +139,28 @@
             s++;
         }
         console.assert(s == 10, "simple_test2 failed. ");
-        console.log("Simple Test 1 passed. ");
+        console.log("Simple Test 1 passed.");
     }
 
-    simple_test1(); simple_test2();
+    function dynamic_programming_test() 
+    {
 
+    }
+
+    /**
+     *  A function that runs the test or run the setup for things. 
+     */
+    function must_run(){
+        simple_test1(); simple_test2();
+        return;
+    }
+
+    must_run();
+    
+    // export this module. 
+    return {
+        DYNAMIC_TABLE: BEST_SPANNING_PATH, 
+        BEST_SPANNING_PATH: BEST_SPANNING_PATH
+    }
 
 })();
