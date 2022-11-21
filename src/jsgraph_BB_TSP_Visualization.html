@@ -4,6 +4,7 @@
                 Traveling Salesmans Problem
         </title>
         <script src="./branchandBound_func.js" type="text/javascript"></script>
+        <script src="./randomGraph.js" type="text/javascript"></script>
         <script src="../libs/lodash/lodash.min.js"></script>
         <script src="../libs/vis.js" type="text/javascript" type = "module"></script>
         <script src="../libs/jsgraphs.js" type="text/javascript"></script>
@@ -18,23 +19,7 @@
             (function(){
                 let numofvertex = 6;
                 let g = new jsgraphs.WeightedGraph(numofvertex);
-
-                // 6 vertex example solution - 0- 
-                g.addEdge(new jsgraphs.Edge(0, 1, 25));
-                g.addEdge(new jsgraphs.Edge(0, 2, 19));
-                g.addEdge(new jsgraphs.Edge(0, 3, 19));
-                g.addEdge(new jsgraphs.Edge(0, 4, 16));
-                g.addEdge(new jsgraphs.Edge(0, 5, 28));
-                g.addEdge(new jsgraphs.Edge(1, 2, 24));
-                g.addEdge(new jsgraphs.Edge(1, 3, 30));
-                g.addEdge(new jsgraphs.Edge(1, 4, 27));
-                g.addEdge(new jsgraphs.Edge(1, 5, 17));
-                g.addEdge(new jsgraphs.Edge(2, 3, 18));
-                g.addEdge(new jsgraphs.Edge(2, 4, 20));
-                g.addEdge(new jsgraphs.Edge(2, 5, 23));
-                g.addEdge(new jsgraphs.Edge(3, 4, 19));
-                g.addEdge(new jsgraphs.Edge(3, 5, 32));
-                g.addEdge(new jsgraphs.Edge(4, 5, 41));
+                g = randomgraph(g, numofvertex)// generate random graph
 
                 //Run branch and bound 
                 let tourcost;
