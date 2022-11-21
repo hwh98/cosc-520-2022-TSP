@@ -4,11 +4,12 @@ var origin_g;// original graph
 var numofvertex;//number of vertex 
 
 
-// @desc the branch and bound function.
-// @param {bb_g} is a jsgraphs.WeightedGraph() object. It's the original graph for the branch and bound.
-// @return {glob_tour} is the tour solution of the TSP problem.
-// @returns {glob_loowerbound} is the cost of the solution.
-// @example 
+/**
+ * @desc the branch and bound function.
+ * @param {bb_g} is a jsgraphs.WeightedGraph() object. It's the original graph for the branch and bound.
+ * @return {glob_tour} is the tour solution of the TSP problem.
+ * @returns {glob_loowerbound} is the cost of the solution.
+ */
 function branchandBound(bb_g){ //bb_g is the global original graph.
     origin_g = _.cloneDeep(bb_g)
     numofvertex = bb_g.V;
@@ -58,11 +59,13 @@ function branchandBound(bb_g){ //bb_g is the global original graph.
     return [glob_tour, glob_lowerbound]
 }
 
-// @desc the recursion funciton to branch and bound.
-// @param {recur_g} the recursion grapg - "bb_g" of the branchandBound() function.
-// @param {b_vertex} is the vertex we will branch on 
-// @param {adjacent_vertex} is a list of adjacent vertex of the b_vertex. EX: [0, 1, 3]
-// @returns 
+/**
+ * @desc the recursion funciton to branch and bound.
+ * @param {recur_g} the recursion grapg - "bb_g" of the branchandBound() function. 
+ * @param {b_vertex} is the vertex we will branch on 
+ * @param {adjacent_vertex} is a list of adjacent vertex of the b_vertex. EX: [0, 1, 3]
+ * @returns 
+ */
 function bbRecursion(recur_g, b_vertex, adjacent_vertex){
     console.log("branch edge "+ b_vertex + " - " + adjacent_vertex)
     let storeEdge = recur_g.edge(b_vertex,adjacent_vertex).weight;// record the removed edge's weight.
@@ -124,12 +127,14 @@ function bbRecursion(recur_g, b_vertex, adjacent_vertex){
     }
 }
 
-// @desc The function to check if the edge of MST graph is tour. 
-// @param {g} is a jsgraphs.graph object generated from MST. Note that the g.adjList is a list of adjacent vertex for each vertex.
-//          If a 5 vertex graph is a tour, then g.adjList is like [ [ 1, 3 ], [ 0, 4 ], [ 4, 3 ], [ 2, 0 ], [ 1, 2 ] ]
-//          If a 8 vertex graph is not a tour, then g.adjList is like length of g [[ 7, 2 ], [ 7 ], [ 3, 0, 6 ], [ 2 ], [ 5 ], [ 7, 4 ], [ 2 ], [ 0, 1, 5 ]]
-// @returns {true} if all the connected(existing) edge in g is a tour
-// @returns {false} if the if all the connected(existing) edge in g is not a tour.
+/**
+ * @desc The function to check if the edge of MST graph is tour. 
+ * @param {g} is a jsgraphs.graph object generated from MST. Note that the g.adjList is a list of adjacent vertex for each vertex.
+ *          If a 5 vertex graph is a tour, then g.adjList is like [ [ 1, 3 ], [ 0, 4 ], [ 4, 3 ], [ 2, 0 ], [ 1, 2 ] ]
+ *          If a 8 vertex graph is not a tour, then g.adjList is like length of g [[ 7, 2 ], [ 7 ], [ 3, 0, 6 ], [ 2 ], [ 5 ], [ 7, 4 ], [ 2 ], [ 0, 1, 5 ]]
+ * @returns {true} if all the connected(existing) edge in g is a tour
+ * @returns {false} if the if all the connected(existing) edge in g is not a tour.
+ */
 function istour(fea_g){
     let onedegreevertex=0;// the one-degree edge counter.
     for(let v = 0; v<fea_g.adjList.length; ++v){ 
@@ -146,9 +151,12 @@ function istour(fea_g){
     console.log("The connected ege is a tour.");
     return true;// all existing edge is a tour.
 }
-// @desc get the tour. This function will only be executed if the istour() return true.
-// @params is a sgraphs.KruskalMST.mst object directly generated from MST.
-// @returns {tourList} the list of tour EX: [ [ 1, 4 ], [ 1, 2 ], [ 3, 4 ], [ 0, 2 ], [ 0, 3 ] ]
+
+/**
+ * @desc get the tour. This function will only be executed if the istour() return true.
+ * @param {gett_g} gett_g is a sgraphs.KruskalMST.mst object directly generated from MST.
+ * @returns {tourList} the list of tour EX: [ [ 1, 4 ], [ 1, 2 ], [ 3, 4 ], [ 0, 2 ], [ 0, 3 ] ]
+ */
 function getTour(gett_g){
     console.log("Get the tour")
     let tourList = []
@@ -174,12 +182,13 @@ function getTour(gett_g){
     return tourList
 }
 
-
-// @desc make sure the generated edge of MST connected all edge, which means MST yield only "one tree" rather than two disconnected tree. 
-//      A 4 vertex graph must have at least 3 edges to form a valid connected MST, 2 edges in such graph indicates the MST has many trees - not connected  
-// @param {g} is a jsgraphs.graph object generated from MST.
-// @returns {true} if the graph is perfectly connected.
-// @returns {false} if some part of the MST edges is not connected to others.
+/**
+ * @desc make sure the generated edge of MST connected all edge, which means MST yield only "one tree" rather than two disconnected tree. 
+ *      A 4 vertex graph must have at least 3 edges to form a valid connected MST, 2 edges in such graph indicates the MST has many trees - not connected  
+ * @param {g} is a jsgraphs.graph object generated from MST.
+ * @returns {true} if the graph is perfectly connected.
+ * @returns {false} if some part of the MST edges is not connected to others.
+ */
 function oneTreeMST(one_g){
     let vertex_count = 0; // the number of vertex actually used in the MST.
     for(let i = 0; i<one_g.adjList.length; ++i){
@@ -195,11 +204,14 @@ function oneTreeMST(one_g){
     return true;
 }
 
-// @desc calcualte the total cost of the tour. This funciton will only be executed when oneTreeMST() return true.
-// @param {whole_g} is the original graph that is used to generated MST.
-// @param {mst_g} is the resulting MST graph.
-// @returns {totalCost} is the cost of all edges in the MST adding the two edges that is waiting to be connected. With the connection of two  remaining edges, we forms a tour.
-// @returns {mst_cost} is the total weight of the mst edge, which is in the {mst_g} graph. 
+/**
+ * @desc calcualte the total cost of the tour. This funciton will only be executed when oneTreeMST() return true.
+ * @param {whole_g} is the original graph that is used to generated MST.
+ * @param {mst_g} is the resulting MST graph.
+ * @returns @returns {totalCost} is the cost of all edges in the MST adding the two edges that is waiting to be connected. 
+ *          With the connection of two  remaining edges, we forms a tour.
+ * @returns {mst_cost} is the total weight of the mst edge, which is in the {mst_g} graph. 
+ */
 function calculatetourcost(mst_g, mst_cost){
     let totalCost = mst_cost;
     let waitingvertex = [];// the two node waiting to be connected to form a tour.
@@ -213,10 +225,12 @@ function calculatetourcost(mst_g, mst_cost){
     return totalCost;
 }
 
-// @desc find the vertext that connect to many vertex - the vertex with maximum degree
-// @param {branch_g} is a jsgraphs.graph() object generated from MST.
-// @returns {branchingvertex} is the vertex we will branch in the following step EX: 1
-// @returns {adjacentvertex} is the list of 3 adjacent vertexs connected to vertex EX: [1, 3, 0]
+/**
+ * @desc find the vertext that connect to many vertex - the vertex with maximum degree
+ * @param {branch_g} is a jsgraphs.graph() object generated from MST.
+ * @returns {branchingvertex} is the vertex we will branch in the following step EX: 1
+ * @returns {adjacentvertex} is the list of 3 adjacent vertexs connected to vertex EX: [1, 3, 0]
+ */
 function findBranchVertex(branch_g){
     let branchingvertex;
     let maxdegree = -1;
@@ -235,13 +249,3 @@ function findBranchVertex(branch_g){
 
     return [branchingvertex, adjacentvertex];
 }
-
-// @desc the graph has no more connected edge to form a tour, as a result, the MST select the Infinity edge - the excluded edge in the MST. 
-//      Since you exclude too many edge, the MST has no choice but to select Infinity
-// @param {con_g} is a jsgraphs.graph() object generated from MST.
-// @returns {true} if the edge of MST include no Infinity edge - The tour is possible.
-// @returns {false} if the edge generated from MST include Infinity edge - The tour is impossible to find anymore, so the branch is infeasible.
-
-
-
-//module.exports = {branchandBound, bbRecursion, istour, getTour, oneTreeMST, calculatetourcost, findBranchVertex}
