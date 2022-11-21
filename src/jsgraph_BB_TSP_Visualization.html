@@ -27,6 +27,10 @@
             var g_nodes = [];
             var g_edges = [];
             
+            /**
+             * @desc the function create the first random graph and visualize the it.
+             *      The part will only be executed by click "Generate the graph" button.
+             */ 
             function runBB(){
                 let numofvertex = document.getElementById("numofVertex").value;
                 g = new jsgraphs.WeightedGraph(numofvertex);
@@ -70,73 +74,12 @@
                 };
                 let options = {};
                 let network = new vis.Network(container, data, options);
-
-
-
-
-                // let kruskal = new jsgraphs.KruskalMST(g); 
-                // let mst = kruskal.mst;
-                // let mst_result = new jsgraphs.Graph(numofvertex); // create the MST graph.
-                // let g_nodes = [];
-                // let g_edges = [];
-                // for(let v=0; v < g.V; ++v){
-                //     g.node(v).label = 'Node ' + v; // assigned 'Node {v}' as label for node v
-                //     g_nodes.push({
-                //        id: v,
-                //        label: g.node(v).label,
-                //        color: '2980B9'
-                //     });
-                // }
-                // // set up the solution
-                // for(let i=0; i < mst.length; ++i) {
-                //     let e = mst[i];
-                //     let v = e.either();
-                //     let w = e.other(v);
-                //     //e.highlighted = true;
-                //     console.log('(' + v + ', ' + w + '): ' + e.weight);
-                //     mst_result.addEdge(w, v); // add the MST connected edge to MST graph.
-                //     g_edges.push({
-                //         from: v,
-                //         to: w,
-                //         length: e.weight,
-                //         label: '' + e.weight,
-                //         color: '#1B4F72',
-                //         value: 2
-                //     });
-                // }
-                
-                // for(let v = 0; v < g.V; ++v) {
-                    
-                //     let adj_v = g.adj(v);
-                //     for(let i = 0; i < adj_v.length; ++i) {
-                //         let e = adj_v[i];
-                //         let w = e.other(v);
-                //         if(w > v) continue; // make sure only one edge between w and v since the graph is undirected
-                //         if(e.highlighted) continue;
-                        
-                //         g_edges.push({
-                //             from: v,
-                //             to: w,
-                //             length: e.weight,
-                //             label: '' + e.weight
-                //         });
-                //     };
-                // }
-                
-
-                // let nodes = new vis.DataSet(g_nodes);
-                // // create an array with edges
-                // let edges = new vis.DataSet(g_edges);
-
-                // // create a network
-                // let container = document.getElementById('mynetwork');
-                // let data = {
-                //     nodes: nodes,
-                //     edges: edges
-                // };
-                // let options = {};
-                // let network = new vis.Network(container, data, options);
             };
+            
+            /**
+             * @desc the function will create another "Find the tour" button and then execute the runBB() function. 
+             *       The function will only we executed after clicking the "Generate the grpah" button.
+             */
             function creategraph(){
                 let solutionBut = document.createElement("button")
                 solutionBut.innerHTML="Find the tour";
@@ -144,6 +87,11 @@
                 document.getElementById("solButton").appendChild(solutionBut)
                 runBB();
             }
+
+            /** 
+             * @desc the function will run the branch and bound algorithm to find the solution and visalize it. The function will be executed after the user hit the "Find the tour" button
+             *      Create the cost, execution time on html webpage and update the visualization to shows the solution tour.
+             */
             function findsolution(){
                 let startTime = performance.now()
                 //Run branch and bound 
@@ -172,12 +120,10 @@
                         color: '#1B4F72',
                         value: 2
                     });
-                }
-                                
+                }               
                 let nodes = new vis.DataSet(g_nodes);
                 // create an array with edges
                 let edges = new vis.DataSet(g_edges);
-
                 // create a network
                 let container = document.getElementById('mynetwork');
                 let data = {
