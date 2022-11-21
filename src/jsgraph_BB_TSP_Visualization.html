@@ -17,6 +17,7 @@
         
         <script type="text/javascript">
             (function(){
+                let startTime = performance.now()
                 let numofvertex = 6;
                 let g = new jsgraphs.WeightedGraph(numofvertex);
                 g = randomgraph(g, numofvertex)// generate random graph
@@ -25,10 +26,10 @@
                 let tourcost;
                 let bb_tour;
                 [bb_tour, tourcost] = branchandBound(g)
-                
-                let kruskal = new jsgraphs.KruskalMST(g); 
-                let mst = kruskal.mst;
-                let mst_result = new jsgraphs.Graph(numofvertex); // create the MST graph.
+                let endTime = performance.now()
+                console.log(`Call to doSomething took ${endTime - startTime} milliseconds`)
+
+                // Visualization 
                 let g_nodes = [];
                 let g_edges = [];
                 for(let v=0; v < g.V; ++v){
@@ -40,7 +41,7 @@
                     });
                 }
 
-                // set up the solution
+                // set up the visualizaiton of branch and bound solution
                 for(let i=0; i < bb_tour.length; ++i) {
                     //let e = mst[i];
                     let v = bb_tour[i][0];
@@ -48,7 +49,6 @@
                     let weight = g.edge(v,w).weight;
                     g.adj(v)[w-1].highlighted = true;
                     console.log('(' + v + ', ' + w + '): ' + weight);
-                    mst_result.addEdge(w, v); // add the MST connected edge to MST graph.
                     g_edges.push({
                         from: v,
                         to: w,
@@ -79,7 +79,6 @@
                 let nodes = new vis.DataSet(g_nodes);
                 // create an array with edges
                 let edges = new vis.DataSet(g_edges);
-
                 // create a network
                 let container = document.getElementById('mynetwork');
                 let data = {
@@ -88,6 +87,7 @@
                 };
                 let options = {};
                 let network = new vis.Network(container, data, options);
+
             })();
         </script>
     </body>
