@@ -17,52 +17,29 @@
         <input type = "text" id="numofVertex" value = "6"/>
         <br/>
         <button onclick="creategraph()" id="numVertexbut">Generate the graph</button>
+        <p id="solButton"></p>
         <p id="t_cost">  </p>
         <p id="exec_time">  </p>
         <div id="mynetwork"></div>
         
         <script type="text/javascript">
+            var g;
+            var g_nodes = [];
+            var g_edges = [];
+            
             function runBB(){
-                let startTime = performance.now()
                 let numofvertex = document.getElementById("numofVertex").value;
-                let g = new jsgraphs.WeightedGraph(numofvertex);
-                g = randomgraph(g, numofvertex)// generate random graph
+                g = new jsgraphs.WeightedGraph(numofvertex);
 
-                //Run branch and bound 
-                let tourcost;
-                let bb_tour;
-                [bb_tour, tourcost] = branchandBound(g)
-                let endTime = performance.now()
-                console.log(`Call to doSomething took ${endTime - startTime} milliseconds`)
-                document.getElementById("t_cost").innerHTML = "The tour cost is " + tourcost;
-                document.getElementById("exec_time").innerHTML = "It takes " + (endTime - startTime) +" milliseconds to the solution";
-
-                // Visualization 
-                let g_nodes = [];
-                let g_edges = [];
+                g = randomgraph(g, numofvertex)
+                
+                // Visualization of the random graph
                 for(let v=0; v < g.V; ++v){
                     g.node(v).label = 'Node ' + v; // assigned 'Node {v}' as label for node v
                     g_nodes.push({
                        id: v,
                        label: g.node(v).label,
                        color: '2980B9'
-                    });
-                }
-                // set up the visualizaiton of branch and bound solution
-                for(let i=0; i < bb_tour.length; ++i) {
-                    //let e = mst[i];
-                    let v = bb_tour[i][0];
-                    let w = bb_tour[i][1];
-                    let weight = g.edge(v,w).weight;
-                    g.adj(v)[w-1].highlighted = true;
-                    console.log('(' + v + ', ' + w + '): ' + weight);
-                    g_edges.push({
-                        from: v,
-                        to: w,
-                        length: weight,
-                        label: '' + weight,
-                        color: '#1B4F72',
-                        value: 2
                     });
                 }
                 for(let v = 0; v < g.V; ++v) {
@@ -81,8 +58,7 @@
                         });
                     };
                 }
-                
-
+                                
                 let nodes = new vis.DataSet(g_nodes);
                 // create an array with edges
                 let edges = new vis.DataSet(g_edges);
@@ -95,10 +71,122 @@
                 let options = {};
                 let network = new vis.Network(container, data, options);
 
+
+
+
+                // let kruskal = new jsgraphs.KruskalMST(g); 
+                // let mst = kruskal.mst;
+                // let mst_result = new jsgraphs.Graph(numofvertex); // create the MST graph.
+                // let g_nodes = [];
+                // let g_edges = [];
+                // for(let v=0; v < g.V; ++v){
+                //     g.node(v).label = 'Node ' + v; // assigned 'Node {v}' as label for node v
+                //     g_nodes.push({
+                //        id: v,
+                //        label: g.node(v).label,
+                //        color: '2980B9'
+                //     });
+                // }
+                // // set up the solution
+                // for(let i=0; i < mst.length; ++i) {
+                //     let e = mst[i];
+                //     let v = e.either();
+                //     let w = e.other(v);
+                //     //e.highlighted = true;
+                //     console.log('(' + v + ', ' + w + '): ' + e.weight);
+                //     mst_result.addEdge(w, v); // add the MST connected edge to MST graph.
+                //     g_edges.push({
+                //         from: v,
+                //         to: w,
+                //         length: e.weight,
+                //         label: '' + e.weight,
+                //         color: '#1B4F72',
+                //         value: 2
+                //     });
+                // }
+                
+                // for(let v = 0; v < g.V; ++v) {
+                    
+                //     let adj_v = g.adj(v);
+                //     for(let i = 0; i < adj_v.length; ++i) {
+                //         let e = adj_v[i];
+                //         let w = e.other(v);
+                //         if(w > v) continue; // make sure only one edge between w and v since the graph is undirected
+                //         if(e.highlighted) continue;
+                        
+                //         g_edges.push({
+                //             from: v,
+                //             to: w,
+                //             length: e.weight,
+                //             label: '' + e.weight
+                //         });
+                //     };
+                // }
+                
+
+                // let nodes = new vis.DataSet(g_nodes);
+                // // create an array with edges
+                // let edges = new vis.DataSet(g_edges);
+
+                // // create a network
+                // let container = document.getElementById('mynetwork');
+                // let data = {
+                //     nodes: nodes,
+                //     edges: edges
+                // };
+                // let options = {};
+                // let network = new vis.Network(container, data, options);
             };
             function creategraph(){
-                alert("Create "+ document.getElementById("numofVertex").value + " Vertices")
+                let solutionBut = document.createElement("button")
+                solutionBut.innerHTML="Find the tour";
+                solutionBut.addEventListener('click', findsolution)
+                document.getElementById("solButton").appendChild(solutionBut)
                 runBB();
+            }
+            function findsolution(){
+                let startTime = performance.now()
+                //Run branch and bound 
+                let tourcost;
+                let bb_tour;
+                [bb_tour, tourcost] = branchandBound(g)
+                let endTime = performance.now()
+                console.log(`Call to doSomething took ${endTime - startTime} milliseconds`)
+                document.getElementById("t_cost").innerHTML = "The tour cost of the "+ document.getElementById("numofVertex").value +" vertices graph is " + tourcost;
+                document.getElementById("exec_time").innerHTML = "It takes " + (endTime - startTime) +" milliseconds to find the solution";
+
+                // Visualization of branch and bound solution
+                for(let i=0; i < bb_tour.length; ++i) {
+                    //let e = mst[i];
+                    let v = bb_tour[i][0];
+                    let w = bb_tour[i][1];
+                    let weight = g.edge(v,w).weight;
+                    //e.highlighted = true;
+                    g.adj(v)[w-1].highlighted = true; // avoid the duplicate edge
+                    console.log('(' + v + ', ' + w + '): ' + weight);
+                    g_edges.push({
+                        from: v,
+                        to: w,
+                        length: weight,
+                        label: '' + weight,
+                        color: '#1B4F72',
+                        value: 2
+                    });
+                }
+                                
+                let nodes = new vis.DataSet(g_nodes);
+                // create an array with edges
+                let edges = new vis.DataSet(g_edges);
+
+                // create a network
+                let container = document.getElementById('mynetwork');
+                let data = {
+                    nodes: nodes,
+                    edges: edges
+                };
+                let options = {};
+                let network = new vis.Network(container, data, options);
+
             }
         </script>
     </body>
