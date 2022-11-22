@@ -48,14 +48,26 @@ Here, we will use the Minmum Spanning Tree algorithm to decide which vertex we b
 The notation of the algorithm is as followed:
 
  * $G$ = (V,E)$ the input undirected graph of TSP.
- * $c : E -> R$ is the weight of the edge should be non-negative.
+ * $c : E  \rightarrow  R$ is the weight of the edge should be non-negative.
  * $P \subseteq E$ the path P is the set of edge E.
  * $MST()$ is the minimum spannign tree algorithm, and the $MST(E')$ refer to the algorithm in the subgraph $G(V,E')$
- * 
 Our goal is to find the path(tour) that will visited each vertex exactly once.
 
 The algorithm for finding the solution tour for TSP is as follow:
-
+1. Set $C*$ as being undefined.
+2. Initialized a stack with ${E}# randomly.
+3. WHILE stack is no-empty DO
+    - Take and remove an item from the stack and call it $E'$
+    - IF the graph $G(V,E') is not connected, goto(3)
+    - Compute $T := MST(E')$
+    - IF T is a path and $c(T) < c(C*) or C* undeined$ 
+        THEN update $C* := T and goto (3)
+    - IF $T$ is a path and $c(T) >= c(C*)$ 
+        THEN goto (3)
+    - Let $v \in V$ be a node that is incident to at least 3 edges in $T$
+    - Let $e1, e2, e3 \subseteq \delta(V) \bigcap T$ be 3 edges that are incident to $v$ in $T$
+    - Put the $E'$ {e1}, $E'$ {e2}, $E'$ {e3} on the stack
+12. Return $C*$
 
 ---
 ### **Sources**
