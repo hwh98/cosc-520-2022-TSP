@@ -71,7 +71,7 @@ The algorithm for finding the solution tour for TSP is as follow:
 
 ### Installation instruction for this algorithm. 
 
-lodash libs, python(for python httpserver, ...
+(npm libs) lodash, jest, jest-regex-util , python(for python httpserver, ...)
 
 ---
 ### **Sources**
