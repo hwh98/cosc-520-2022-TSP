@@ -39,6 +39,22 @@ And the main part of the algorithm started like:
 ---
 ### **The Branch and Bound Algorithm with Minimum Spanning Tree for TSP**
 
+The branch and bound algorithm is based on the principle that we cut off the subset of solution, e.g: feasible suboptimal solution, that is, the total set of feasible solution is partitioned into smaller subset of solution. The smaller subsets can then be evaluated systematically until the best solution is found. 
+To sums up, it stepwise enumerate all the possible candidate solution by exploreing the search space by the means of a decision tree.
+In each node, we will branch and constraint to achieve the sub-problem in the next level, and we will calculate the bound of the following splitted node to see if the feasible solution is better than the solution we found so far to decide whether to update best solution. 
+In general, the branching strategy and the bound calcuation of the node can be obtained in any way. 
+Here, we will use the Minmum Spanning Tree algorithm to decide which vertex we branch on.
+
+The notation of the algorithm is as followed:
+
+ * $G$ = (V,E)$ the input undirected graph of TSP.
+ * $c : E -> R$ is the weight of the edge should be non-negative.
+ * $P \subseteq E$ the path P is the set of edge E.
+ * $MST()$ is the minimum spannign tree algorithm, and the $MST(E')$ refer to the algorithm in the subgraph $G(V,E')$
+ * 
+Our goal is to find the path(tour) that will visited each vertex exactly once.
+
+The algorithm for finding the solution tour for TSP is as follow:
 
 
 ---
