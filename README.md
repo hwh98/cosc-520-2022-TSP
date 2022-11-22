@@ -55,10 +55,10 @@ Our goal is to find the path(tour) that will visited each vertex exactly once.
 
 The algorithm for finding the solution tour for TSP is as follow:
 1. Set $C*$ as being undefined.
-2. Initialized a stack with ${E}# randomly.
+2. Initialized a stack with ${E}$ randomly.
 3. WHILE stack is no-empty DO
     - Take and remove an item from the stack and call it $E'$
-    - IF the graph $G(V,E') is not connected, goto(3)
+    - IF the graph $G(V,E')$ is not connected, goto(3)
     - Compute $T := MST(E')$
     - IF T is a path and $c(T) < c(C*) or C* undeined$ 
         THEN update $C* := T and goto (3)
