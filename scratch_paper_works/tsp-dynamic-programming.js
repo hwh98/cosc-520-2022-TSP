@@ -35,7 +35,7 @@ var TSPDPModule = (function (){
         function *k_combinatorics_recur(a, k, start_at, already_chosen)
         {
             if (k == 0) {
-                yield already_chosen;
+                yield already_chosen;   
                 return;
             }
             n = a.length
