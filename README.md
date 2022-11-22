@@ -5,7 +5,7 @@ This repo is for the final project of COSP 520 2022 Winter Term 1. We are doing 
 
 
 ---
-### **The Dynamic Programming Algorithm for TSP**
+## **The Dynamic Programming Algorithm for TSP**
 
 We define a graph $G = (V, E)$, a weighted undirected graph, then we consider the recursive table: 
 
@@ -37,7 +37,7 @@ And the main part of the algorithm started like:
 * Encode each of the subset of a set of size $n$ into an integer in $[0, 2^n]$. 
 
 ---
-### **The Branch and Bound Algorithm with Minimum Spanning Tree for TSP**
+## **The Branch and Bound Algorithm with Minimum Spanning Tree for TSP**
 
 The branch and bound algorithm is based on the principle that we cut off the subset of solution, e.g: feasible suboptimal solution, that is, the total set of feasible solution is partitioned into smaller subset of solution. The smaller subsets can then be evaluated systematically until the best solution is found. 
 To sums up, it stepwise enumerate all the possible candidate solution by exploreing the search space by the means of a decision tree.
@@ -68,6 +68,9 @@ The algorithm for finding the solution tour for TSP is as follow:
     - Let $e1, e2, e3 \subseteq \delta(V) \bigcap T$ be 3 edges that are incident to $v$ in $T$
     - Put the $E'$ {e1}, $E'$ {e2}, $E'$ {e3} on the stack
 12. Return $C*$
+
+### Installation instruction for this algorithm. 
+
 
 ---
 ### **Sources**
