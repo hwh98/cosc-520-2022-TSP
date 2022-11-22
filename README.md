@@ -47,7 +47,7 @@ Here, we will use the Minmum Spanning Tree algorithm to decide which vertex we b
 
 The notation of the algorithm is as followed:
 
- * $G$ = (V,E)$ the input undirected graph of TSP.
+ * $G = (V,E)$ the input undirected graph of TSP.
  * $c : E  \rightarrow  R$ is the weight of the edge should be non-negative.
  * $P \subseteq E$ the path P is the set of edge E.
  * $MST()$ is the minimum spannign tree algorithm, and the $MST(E')$ refer to the algorithm in the subgraph $G(V,E')$
