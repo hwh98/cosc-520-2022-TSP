@@ -36,6 +36,7 @@ And the main part of the algorithm started like:
 
 * Encode each of the subset of a set of size $n$ into an integer in $[0, 2^n]$. 
 
+---
 ### **The Branch and Bound Algorithm with Minimum Spanning Tree for TSP**
 
 
