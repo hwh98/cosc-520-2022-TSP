@@ -1,4 +1,8 @@
+"""
+Author's Name: Hongda Li
 
+This is a script for the final project for COSC 520 2022 Winter Term1, at UBC Okanagan.
+"""
 
 def k_combinatorics(n, k):
     """
@@ -65,17 +69,24 @@ class DynamicTSP:
 
     def construct_subset(this, k):
         """
-
+            Make a subset of size k for the dynamic table in the field: this.ctable, this.ptable.
         :param k:
+            The size of the subset to generated on
         :return:
+            None
         """
-        pass
+        if this.k <= k:
+            return None
+        if this.k >= k + 1:
+            raise Exception
+        
+        return None
 
     def perform(this, verbosity):
         """
         Perform the algorithm and print out stuff for checking.
         :return:
-        
+
         """
 
 
