@@ -30,7 +30,7 @@ And the main part of the algorithm started like:
 
 * For $k = 3...N$ do: 
   * For all $|S| = k, S \subseteq V$, DO: 
-    * $C(i, j, S) :=\min_{l \in S\setminus \{i, j\}}\{C(S\setminus \{j\}, i, l) + c(l, j)\}$
+    * $C(S, i, j) :=\min_{l \in S\setminus \{i, j\}}\{C(S\setminus \{j\}, i, l) + c(l, j)\}$
 
 #### **Subsets Generator**
 
