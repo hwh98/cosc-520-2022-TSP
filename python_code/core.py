@@ -4,6 +4,10 @@ Author's Name: Hongda Li
 This is a script for the final project for COSC 520 2022 Winter Term1, at UBC Okanagan.
 """
 
+from tqdm import tqdm
+import scipy
+import math
+
 def k_combinatorics(n, k):
     """
     Function makes a generator for all subset of size k in a subset of size n.
@@ -46,7 +50,8 @@ def k_subsets(s, k):
         yield [s[idx] for idx in comb]
     return
 
-def rand_full_undigraph_euclidean(N):
+
+def make_arch(N):
     """
         Generator a full graph whose vertices are euclidean points in the space.The points are uniform random
         on the unit square.
@@ -54,7 +59,19 @@ def rand_full_undigraph_euclidean(N):
         The number of points we looking at
     :return:
     """
+
     pass
+
+
+class SimpleEuclideanPoints:
+    """
+    This class models 2d points with Euclidean metrics. Each vertex is a coord and we have a full graphy by
+    making edges between all of them. Giving us N^2/2 many edges for N number of points.
+    """
+
+    def __int__(this, N=10):
+        this.v = [I for I in range(N)]
+        this.edges = list(k_subsets(this.v, 2))
 
 
 class DynamicTSP:
@@ -94,17 +111,19 @@ class DynamicTSP:
             None.
         """
         vertices = set()
-        for e, cost in this.c.items:
-            this.ctable[tuple(sorted(e)), tuple(e)] = cost
-            this.ptable[tuple(sorted(e)), tuple(e)] = list(e)
-            vertices.add(e[1]); vertices.add(e[2])
+        c = {}          # a new, digested edge cost table, all edges must be ordered pairs.
+        for e, cost in this.c.items():
+            c[tuple(sorted(e))] = this.ctable[tuple(sorted(e)), tuple(sorted(e))] = cost
+            this.ptable[tuple(sorted(e)), tuple(sorted(e))] = list(e)
+            vertices.add(e[0]); vertices.add(e[1])
+        this.v = sorted(vertices)
         assert all([isinstance(item, int) for item in this.v]), "The cost table is giving identifiers for vertices " \
                                                                 "that are not integers."
-        this.v = sorted(vertices)
+        this.c = c
         this.k = 2
         return None
 
-    def construct_subset(this):
+    def construct_subset(this, verbose=True):
         """
             Make a subset of size k for the dynamic table in the field: this.ctable, this.ptable.
         :param k:
@@ -112,29 +131,52 @@ class DynamicTSP:
         :return:
             None
         """
+        if this.k == len(this.v):
+            return this
         ptable = {}
         ctable = {}
-        for S in k_subsets(this.v, this.k + 1):                      # S is a sorted array.
-            for idx1 in range(len(this.v)):
-                for idx2 in range(len(this.v)):
-                    i, j = this.v[idx1], this.j[idx2]
-                    if i == j:
-                        continue                                     # skip.
-                    min_cost = float("inf"); min_path = None
-                    for l in set(S) - set([i, j]):                   # min path going from i -> l -> j
-                        T = tuple(set(S) - set([j]))
-                        cost = this.ctable[T, (i, l)] + this.c[l, j]
-                        if cost < min_cost:
-                            min_path = this.ptable[T, (i, l)] + [l, j]
-                            min_cost = min_cost
-                    ctable[tuple(S), (i, j)] = min_cost
-                    ptable[tuple(S), (i, j)] = min_path
+        b = scipy.special.binom
+        n = len(this.v)
+        k = this.k
+        v = this.v
+
+        def has_edge(i, j):
+            return tuple(sorted([i, j])) in this.c
+
+        def C(S, i, j): # recursion table.
+            return this.ctable[S, tuple(sorted([i, j]))]
+
+        def P(S, i, j): # get path
+            return this.ptable[S, tuple(sorted([i, j]))]
+
+        def edge_cost(i, j):
+            return this.c[tuple(sorted([i, j]))] # path cost.
+
+        if verbose:
+            gen = tqdm(list(k_subsets(v, k + 1)))
+        else:
+            gen = tqdm(k_subsets(v, k + 1))
+        for S in gen:
+            for i, j in k_subsets(S, 2):                         # i < j
+                min_cost = float("inf")
+                min_path = None                                  # new optimal
+                for l in set(S) - set([i, j]):                   # min path going from i <-> l <-> j with size k + 1
+                    T = tuple(set(S) - set([j]))                 # S\{j}
+                    if not has_edge(l, j):                       # ignore this path.
+                        continue
+                    cost = C(T, i, l) + edge_cost(l, j)
+                    if cost < min_cost:
+                        min_path = P(T, i, l) + [l, j]
+                        min_cost = cost
+                ctable[tuple(S), (i, j)] = min_cost
+                ptable[tuple(S), (i, j)] = min_path
+
+                if min_path == None:
+                    raise("The graph is disconnected.")
         this.ptable = ptable
         this.ctable = ctable
         this.k = this.k + 1
         return this
-
-
 
         return None
 
