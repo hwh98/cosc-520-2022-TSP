@@ -5,8 +5,12 @@ This is a script for the final project for COSC 520 2022 Winter Term1, at UBC Ok
 """
 
 from tqdm import tqdm
-import scipy
 from warnings import warn
+import scipy
+import matplotlib.pyplot as plt
+import numpy as np
+import math
+
 
 def k_combinatorics(n, k):
     """
@@ -57,7 +61,7 @@ class SimpleEuclideanPoints:
     making edges between all of them. Giving us N^2/2 many edges for N number of points.
     """
 
-    def __int__(this, N=10):
+    def __init__(this, N=10):
         """
             Constructor.
         :param N:
@@ -66,31 +70,77 @@ class SimpleEuclideanPoints:
             This instance.
         """
         this.v = [I for I in range(N)]
-        this.labels = {}
-        this.edges = list(k_subsets(this.v, 2))
-        this.cost = {}
+        this.n = N
+        this.vlabels = None
+        this.edges = list(k_subsets(this.v, 2)) # All undirected edges are ordered pairs.
+        this.__cost = None
+
         if N >= 50:
             warn(f"N={N} is very huge and this is not good for constructing a full graph and solving TSP on it. ")
-        return this
+
+    def __make(this, xs, ys):
+        """
+        Private method for establishing the field of an instance of this class.
+        :param coordx:
+        :param coordy:
+        :return:
+        """
+        d = lambda x1, y1, x2, y2: math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
+        c = {}
+        labels = dict((v, (xs[v], ys[v])) for v in this.v)
+        for v1, v2 in this.edges:
+            x1, y1 = labels[v1]
+            x2, y2 = labels[v2]
+            c[v1, v2] = d(x1, y1, x2, y2)
+        this.__cost = c
+        this.vlabels = labels
+        pass
 
     def circle(this):
         """
             Arrange all the points into a circle and update all the distance between the points.
         :return:
+            itself modified.
         """
-        pass
+        t = np.linspace(0, 2*np.pi, this.n + 1)[:-1]
+        xs = np.cos(t)
+        ys = np.sin(t)
+        this.__make(xs, ys)
+        return this
 
     def random_pts(this):
         """
             Construct random points in the unit square in the positive quadrants.
         :return:
+            itself modified.
         """
-        pass
+        rand = np.random.rand
+        xs, ys = rand(this.n), rand(this.n)
+        this.__make(xs, ys)
+        return this
 
     @property
     def c(this):
+        """
+        The cost table.
+        :return:
+            The cost table copied.
+        """
+        if this.__cost == None:
+            return None
+        return this.__cost.copy()
 
-        pass
+    def visualize_subgraph(this, edges):
+        """
+            Given a set of edges, visualize the subgraph and plot it on a window or something.
+        :param edges:
+            a list of tuples.
+        :return:
+            the instance itself.
+        """
+
+        return this
+
 
 class DynamicTSP:
     """
@@ -120,7 +170,6 @@ class DynamicTSP:
         this.v = None
         this.k = 0
         this.construct_base()
-        return this
 
     def construct_base(this):
         """
@@ -142,7 +191,7 @@ class DynamicTSP:
         this.k = 2
         return None
 
-    def construct_subset(this, verbose=True):
+    def construct_subsets(this, verbose=True):
         """
             Make a subset of size k for the dynamic table in the field: this.ctable, this.ptable.
         :param k:
@@ -180,7 +229,7 @@ class DynamicTSP:
                 min_cost = float("inf")
                 min_path = None                                  # new optimal
                 for l in set(S) - set([i, j]):                   # min path going from i <-> l <-> j with size k + 1
-                    T = tuple(set(S) - set([j]))                 # S\{j}
+                    T = tuple(sorted(set(S) - set([j])))                 # S\{j}
                     if not has_edge(l, j):                       # ignore this path.
                         continue
                     cost = C(T, i, l) + edge_cost(l, j)
@@ -197,14 +246,21 @@ class DynamicTSP:
         this.k = this.k + 1
         return this
 
-    def perform(this, verbosity):
+    def perform_all(this, verbose:bool=True):
         """
-        Perform the algorithm and print out stuff for checking.
+            Perform the search on the optimal path by looking constructing spanning paths for all subsets and then
+            in the end find the optimal tour that go through every paths.
+        :param verbose
+            Use slightly more memory to get print out for the algorithm so we know what progress we are having.
         :return:
-
+            A list of vertices indicating the optimal path.
         """
-        pass
+        gen = tqdm(range(3, len(this.v))) if verbose else range(3, len(this.v))
+        for itr in gen:
 
+            this.construct_subsets()
+
+        pass
 
 
 

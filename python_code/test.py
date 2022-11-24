@@ -1,4 +1,4 @@
-from core import k_combinatorics, k_subsets, DynamicTSP, scipy
+from core import k_combinatorics, k_subsets, DynamicTSP, scipy, SimpleEuclideanPoints
 
 
 
@@ -30,32 +30,48 @@ def Test2():
     return True
 
 
-def Test3():
+def DynamicTSPTestBasic():
     # make cost table.
     c = {}
     c[0, 1] = c[1, 2] = c[2, 3] = c[3, 0] = 1
     c[0, 2] = 1.2
     c[3, 1] = 1.2
-    global dtsp
-    dtsp = DynamicTSP(c)
-    for k, v in dtsp.ctable.items():
+    global DTSP
+    DTSP = DynamicTSP(c)
+    DTSP.construct_subsets()
+    DTSP.construct_subsets()
+    print("======== DTSP Simple Tests =========== ")
+    for k, v in DTSP.ctable.items():
         print(f"{k} |-> {v}")
-    dtsp.construct_subset()
-    for k, v in dtsp.ctable.items():
-        print(f"{k} |-> {v}")
-    dtsp.construct_subset()
-    for k, v in dtsp.ctable.items():
-        print(f"{k} |-> {v}")
+    ctable = DTSP.ctable
+    assert ctable[(0, 1, 2, 3), (0, 1)] == 3, "Something wrong is with test3, for DynamicTSP. "
     return True
+
+
+def SimpleGraphTest():
+    global SEUP
+    N = 10
+    SEUP = SimpleEuclideanPoints(N)
+    dtsp = DynamicTSP(SEUP.circle().c)
+    for itr in range(N - 2):
+        dtsp.construct_subsets()
+    for k, v in dtsp.ctable.items():
+        print(f"({k}, v) |-> {v}")
+    return True
+
+
+
 
 
 def run_tests():
     results = []
-    tests = [Test1, Test2, Test3]
+    tests = [Test1, Test2, DynamicTSPTestBasic, SimpleGraphTest]
     for test in tests:
         results.append(test())
     for fxn, result in zip(tests, results):
         print(f"{fxn.__name__}: {'Passed' if result else 'Failed'}")
+
+
 
 
 if __name__ == "__main__":
