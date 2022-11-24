@@ -189,14 +189,13 @@ function getTour(gett_g){
  * @returns {true} if the graph is perfectly connected.
  * @returns {false} if some part of the MST edges is not connected to others.
  */
-function oneTreeMST(one_g){
-    let vertex_count = 0; // the number of vertex actually used in the MST.
+ function oneTreeMST(one_g){
+    let edge_count = 0;
     for(let i = 0; i<one_g.adjList.length; ++i){
-        if( one_g.adjList[i].length>0){
-            vertex_count++;
-        }
+        edge_count +=one_g.adjList[i].length
     }
-    if(Object.keys(one_g.edges).length < vertex_count - 1){ // the g might contain more than one MST tree.
+    edge_count = edge_count/2;
+    if(edge_count < one_g.V - 1){ // the g might contain more than one MST tree.
         console.log("The graph of MST has multiple trees - not connected. WRONG MST");
         return false;
     }
