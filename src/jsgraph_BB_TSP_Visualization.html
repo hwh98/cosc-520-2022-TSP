@@ -104,6 +104,7 @@
                 document.getElementById("exec_time").innerHTML = "It takes " + (endTime - startTime) +" milliseconds to find the solution";
 
                 // Visualization of branch and bound solution
+                g_edges = [];
                 for(let i=0; i < bb_tour.length; ++i) {
                     //let e = mst[i];
                     let v = bb_tour[i][0];
@@ -120,7 +121,24 @@
                         color: '#1B4F72',
                         value: 2
                     });
-                }               
+                }    
+                for(let v = 0; v < g.V; ++v) {
+
+                let adj_v = g.adj(v);
+                for(let i = 0; i < adj_v.length; ++i) {
+                    let e = adj_v[i];
+                    let w = e.other(v);
+                    if(w > v) continue; // make sure only one edge between w and v since the graph is undirected
+                    if(e.highlighted) continue;
+
+                    g_edges.push({
+                        from: v,
+                        to: w,
+                        length: e.weight,
+                        label: '' + e.weight
+                    });
+                };
+                }           
                 let nodes = new vis.DataSet(g_nodes);
                 // create an array with edges
                 let edges = new vis.DataSet(g_edges);
