@@ -6,7 +6,7 @@ This is a script for the final project for COSC 520 2022 Winter Term1, at UBC Ok
 
 from tqdm import tqdm
 import scipy
-import math
+from warnings import warn
 
 def k_combinatorics(n, k):
     """
@@ -51,18 +51,6 @@ def k_subsets(s, k):
     return
 
 
-def make_arch(N):
-    """
-        Generator a full graph whose vertices are euclidean points in the space.The points are uniform random
-        on the unit square.
-    :param N:
-        The number of points we looking at
-    :return:
-    """
-
-    pass
-
-
 class SimpleEuclideanPoints:
     """
     This class models 2d points with Euclidean metrics. Each vertex is a coord and we have a full graphy by
@@ -70,9 +58,39 @@ class SimpleEuclideanPoints:
     """
 
     def __int__(this, N=10):
+        """
+            Constructor.
+        :param N:
+            The number of points we want.
+        :return:
+            This instance.
+        """
         this.v = [I for I in range(N)]
+        this.labels = {}
         this.edges = list(k_subsets(this.v, 2))
+        this.cost = {}
+        if N >= 50:
+            warn(f"N={N} is very huge and this is not good for constructing a full graph and solving TSP on it. ")
+        return this
 
+    def circle(this):
+        """
+            Arrange all the points into a circle and update all the distance between the points.
+        :return:
+        """
+        pass
+
+    def random_pts(this):
+        """
+            Construct random points in the unit square in the positive quadrants.
+        :return:
+        """
+        pass
+
+    @property
+    def c(this):
+
+        pass
 
 class DynamicTSP:
     """
@@ -102,6 +120,7 @@ class DynamicTSP:
         this.v = None
         this.k = 0
         this.construct_base()
+        return this
 
     def construct_base(this):
         """
@@ -150,7 +169,7 @@ class DynamicTSP:
             return this.ptable[S, tuple(sorted([i, j]))]
 
         def edge_cost(i, j):
-            return this.c[tuple(sorted([i, j]))] # path cost.
+            return this.c[tuple(sorted([i, j]))]
 
         if verbose:
             gen = tqdm(list(k_subsets(v, k + 1)))
@@ -177,8 +196,6 @@ class DynamicTSP:
         this.ctable = ctable
         this.k = this.k + 1
         return this
-
-        return None
 
     def perform(this, verbosity):
         """
