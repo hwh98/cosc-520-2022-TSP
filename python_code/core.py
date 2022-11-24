@@ -94,7 +94,7 @@ class SimpleEuclideanPoints:
             c[v1, v2] = d(x1, y1, x2, y2)
         this.__cost = c
         this.vlabels = labels
-        pass
+        return this
 
     def circle(this):
         """
@@ -105,8 +105,8 @@ class SimpleEuclideanPoints:
         t = np.linspace(0, 2*np.pi, this.n + 1)[:-1]
         xs = np.cos(t)
         ys = np.sin(t)
-        this.__make(xs, ys)
-        return this
+        return this.__make(xs, ys)
+
 
     def random_pts(this):
         """
@@ -116,8 +116,8 @@ class SimpleEuclideanPoints:
         """
         rand = np.random.rand
         xs, ys = rand(this.n), rand(this.n)
-        this.__make(xs, ys)
-        return this
+        return this.__make(xs, ys)
+
 
     @property
     def c(this):
@@ -138,6 +138,7 @@ class SimpleEuclideanPoints:
         :return:
             the instance itself.
         """
+        #TODO: Implement the scatter plots for Enuclidean points yeah.
 
         return this
 
@@ -256,6 +257,7 @@ class DynamicTSP:
             A list of vertices indicating the optimal path.
         """
         gen = tqdm(range(3, len(this.v))) if verbose else range(3, len(this.v))
+        #TODO: Implement the full algorithm here.
         for itr in gen:
 
             this.construct_subsets()
