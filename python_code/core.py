@@ -10,11 +10,14 @@ import scipy
 import matplotlib.pyplot as plt
 import numpy as np
 import math
+import itertools
+
+VERBOSE = False
 
 
 def k_combinatorics(n, k):
     """
-    Function makes a generator for all subset of size k in a subset of size n.
+    Function makes a generator for all subset of size k in a subset of size n. The same function is in the itrtools.
 
     :param int n: The size of the set we are looking at.
     :param int k: The size subsets from this set that you want to choose from.
@@ -53,6 +56,24 @@ def k_subsets(s, k):
     for comb in k_combinatorics(len(s), k):
         yield [s[idx] for idx in comb]
     return
+
+
+def lst_argmin(d):
+    """
+        Given a dictionary, it terates over all the values and find that keys with the minimum values. None
+        if there is no key.
+    :param d:
+        a dictionary with values that is a number.
+    :return:
+        the key with the maximum values.
+    """
+    min_value = None
+    min_key = None
+    for k, v in d.items():
+        if min_value is None or v < min_value:
+            min_value = v
+            min_key = k
+    return min_key
 
 
 class SimpleEuclideanPoints:
@@ -126,7 +147,7 @@ class SimpleEuclideanPoints:
         :return:
             The cost table copied.
         """
-        if this.__cost == None:
+        if this.__cost is None:
             return None
         return this.__cost.copy()
 
@@ -138,8 +159,15 @@ class SimpleEuclideanPoints:
         :return:
             the instance itself.
         """
-        #TODO: Implement the scatter plots for Enuclidean points yeah.
-
+        # TODO: Test this functions.
+        assert edges is not None, "Can't plot None, please check what you passed into visualize_subgraph. "
+        coordxs = [edges[0][0]]
+        coordys = [edges[0][1]]
+        for _, v in edges[::2]:
+            coordxs.append(v[0])
+            coordys.append(v[1])
+        plt.plot(coordxs, coordys)
+        plt.show()
         return this
 
 
@@ -192,7 +220,7 @@ class DynamicTSP:
         this.k = 2
         return None
 
-    def construct_subsets(this, verbose=True):
+    def construct_subsets(this):
         """
             Make a subset of size k for the dynamic table in the field: this.ctable, this.ptable.
         :param k:
@@ -204,8 +232,6 @@ class DynamicTSP:
             return this
         ptable = {}
         ctable = {}
-        b = scipy.special.binom
-        n = len(this.v)
         k = this.k
         v = this.v
 
@@ -221,7 +247,7 @@ class DynamicTSP:
         def edge_cost(i, j):
             return this.c[tuple(sorted([i, j]))]
 
-        if verbose:
+        if VERBOSE:
             gen = tqdm(list(k_subsets(v, k + 1)))
         else:
             gen = tqdm(k_subsets(v, k + 1))
@@ -230,7 +256,7 @@ class DynamicTSP:
                 min_cost = float("inf")
                 min_path = None                                  # new optimal
                 for l in set(S) - set([i, j]):                   # min path going from i <-> l <-> j with size k + 1
-                    T = tuple(sorted(set(S) - set([j])))                 # S\{j}
+                    T = tuple(sorted(set(S) - set([j])))         # S\{j}
                     if not has_edge(l, j):                       # ignore this path.
                         continue
                     cost = C(T, i, l) + edge_cost(l, j)
@@ -239,9 +265,8 @@ class DynamicTSP:
                         min_cost = cost
                 ctable[tuple(S), (i, j)] = min_cost
                 ptable[tuple(S), (i, j)] = min_path
-
-                if min_path == None:
-                    raise("The graph is disconnected.")
+                if min_path is None:
+                    raise Exception("The graph is disconnected.")
         this.ptable = ptable
         this.ctable = ctable
         this.k = this.k + 1
@@ -257,21 +282,26 @@ class DynamicTSP:
             A list of vertices indicating the optimal path.
         """
         gen = tqdm(range(3, len(this.v))) if verbose else range(3, len(this.v))
-        #TODO: Implement the full algorithm here.
-        for itr in gen:
 
+        # TODO: Implement the full algorithm here.
+        for k in gen:
+            if VERBOSE:
+                print("Constructing k={k}.")
             this.construct_subsets()
+
 
         pass
 
 
-
 def main(name):
-    pass
+    import test
+    test.run_tests()
 
 
-# Press the green button in the gutter to run the script.
+
+
 if __name__ == '__main__':
+    # Press the green button in the gutter to run the script.
     print("The TSP Dynamic programming module is being loaded. ")
     main('PyCharm')
 
