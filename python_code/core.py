@@ -12,10 +12,10 @@ import numpy as np
 import math
 import itertools
 
-VERBOSE = False
+VERBOSE:bool = True   # The global verbose settings. Boolean.
 
 
-def k_combinatorics(n, k):
+def k_combinatorics(n:int, k:int):
     """
     Function makes a generator for all subset of size k in a subset of size n. The same function is in the itrtools.
 
@@ -41,7 +41,7 @@ def k_combinatorics(n, k):
     yield from inner_recur([I for I in range(n)], k, 0, [])
 
 
-def k_subsets(s, k):
+def k_subsets(s, k:int):
     """
         Given the set s, generate all possible subset of set s, with size k, assuming that the elements in the set
         s are unique.
@@ -58,7 +58,7 @@ def k_subsets(s, k):
     return
 
 
-def lst_argmin(d):
+def lst_argmin(d:dict):
     """
         Given a dictionary, it terates over all the values and find that keys with the minimum values. None
         if there is no key.
@@ -161,12 +161,14 @@ class SimpleEuclideanPoints:
         """
         # TODO: Test this functions.
         assert edges is not None, "Can't plot None, please check what you passed into visualize_subgraph. "
-        coordxs = [edges[0][0]]
-        coordys = [edges[0][1]]
-        for _, v in edges[::2]:
-            coordxs.append(v[0])
-            coordys.append(v[1])
+        coordxs = [this.vlabels[0][0]]
+        coordys = [this.vlabels[0][1]]
+        for _, v in edges:
+            coordxs.append(this.vlabels[v][0])
+            coordys.append(this.vlabels[v][1])
         plt.plot(coordxs, coordys)
+        plt.scatter(coordxs, coordys)
+
         plt.show()
         return this
 
@@ -261,7 +263,7 @@ class DynamicTSP:
                         continue
                     cost = C(T, i, l) + edge_cost(l, j)
                     if cost < min_cost:
-                        min_path = P(T, i, l) + [l, j]
+                        min_path = P(T, i, l) + [j]
                         min_cost = cost
                 ctable[tuple(S), (i, j)] = min_cost
                 ptable[tuple(S), (i, j)] = min_path
@@ -272,7 +274,7 @@ class DynamicTSP:
         this.k = this.k + 1
         return this
 
-    def perform_all(this, verbose:bool=True):
+    def perform_all(this):
         """
             Perform the search on the optimal path by looking constructing spanning paths for all subsets and then
             in the end find the optimal tour that go through every paths.
@@ -281,16 +283,18 @@ class DynamicTSP:
         :return:
             A list of vertices indicating the optimal path.
         """
-        gen = tqdm(range(3, len(this.v))) if verbose else range(3, len(this.v))
-
-        # TODO: Implement the full algorithm here.
+        def edge_cost(i, j): return this.c[tuple(sorted([i, j]))]
+        n = len(this.v)
+        gen = tqdm(range(3, n + 1)) if VERBOSE else range(3, n + 1)
         for k in gen:
             if VERBOSE:
                 print("Constructing k={k}.")
             this.construct_subsets()
+        full_paths = {}                 # maps the paths to their lengths
+        for (S, e), p in this.ptable.items():
+            full_paths[tuple(p + [p[0]])] = this.ctable[S, e] + edge_cost(p[0], p[-1])
 
-
-        pass
+        return list(lst_argmin(full_paths))
 
 
 def main(name):

@@ -1,5 +1,4 @@
-from core import k_combinatorics, k_subsets, DynamicTSP, scipy, SimpleEuclideanPoints
-
+from core import k_combinatorics, k_subsets, DynamicTSP, scipy, SimpleEuclideanPoints, itertools, plt
 
 
 def Test1():
@@ -27,11 +26,17 @@ def Test2():
         g = k_combinatorics(5, k)
         assert len(list(g)) == b(5, k), f"k_combinatorics failed for case (k={k},n={5}). "
     print("Test2 passed. ")
+
     return True
 
 
 def DynamicTSPTestBasic():
-    # make cost table.
+    """
+        Make a simple TSP tests, I hardcoded the solutions and the problem for preliminary testinf of the
+        DTSP functionality.
+    :return:
+        True if the test is passed.
+    """
     c = {}
     c[0, 1] = c[1, 2] = c[2, 3] = c[3, 0] = 1
     c[0, 2] = 1.2
@@ -49,6 +54,11 @@ def DynamicTSPTestBasic():
 
 
 def SimpleGraphTest():
+    """
+    Test the SimpleEuclideanPoints agraph functionalities.
+    :return:
+        It just runs it and if there is no error, True is returned.
+    """
     global SEUP
     N = 10
     SEUP = SimpleEuclideanPoints(N)
@@ -60,12 +70,42 @@ def SimpleGraphTest():
     return True
 
 
+def DynamicTSPFull():
+    """
+        Test the TSP dynamic solver using the circular graph.
+    :return:
+        The full solutions.
+    """
+    seup = SimpleEuclideanPoints(10)
+    dtsp = DynamicTSP(seup.circle().c)
+    soln = dtsp.perform_all()
+    soln_expected = list(range(10)) + [0]
+    print(f"The TSP solution for Full circle solve is: {soln}. ")
+    assert soln == soln_expected, "Something is wrong with the full TSP solve on the 10 vertex circular solve. " \
+                                    f"expects: {soln_expected}, but have: {soln}"
+    return True
 
+
+def FullSolveVisualizations():
+    """
+    Solve an instance of the TSP and get a plot out of the solutions.
+
+    :return:
+        True if the test passed.
+    """
+    seup = SimpleEuclideanPoints(8)
+    dtsp = DynamicTSP(seup.circle().c)
+    soln = dtsp.perform_all()
+    edges = itertools.pairwise(soln)
+    seup.visualize_subgraph(list(edges))
+    plt.show()
+    # plt.savefig('my_plot.png')
+    return True
 
 
 def run_tests():
     results = []
-    tests = [Test1, Test2, DynamicTSPTestBasic, SimpleGraphTest]
+    tests = [Test1, Test2, DynamicTSPTestBasic, SimpleGraphTest, DynamicTSPFull, FullSolveVisualizations]
     for test in tests:
         results.append(test())
     for fxn, result in zip(tests, results):
