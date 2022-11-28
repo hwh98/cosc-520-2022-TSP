@@ -2,8 +2,6 @@
 
 This repo is for the final project of COSP 520 2022 Winter Term 1. We are doing something about the Traveling Salesman Problem. 
 
-
-
 ---
 ## **The Dynamic Programming Algorithm for TSP**
 
@@ -30,11 +28,15 @@ And the main part of the algorithm started like:
 
 * For $k = 3...N$ do: 
   * For all $|S| = k, S \subseteq V$, DO: 
-    * $C(S, i, j) :=\min_{l \in S\setminus \{i, j\}}\{C(S\setminus \{j\}, i, l) + c(l, j)\}$
+    * $C(S, i, j) :=\min_{l \in S\setminus \{i, j\}}\{C(S\setminus \{j\}, i, l) + c(l, j)\}$ for all $i ,j \in S; i < j$
 
 #### **Subsets Generator**
 
 * Encode each of the subset of a set of size $n$ into an integer in $[0, 2^n]$. 
+
+### **Implementations Issues and How they Are Addressed**
+
+* 
 
 ---
 ## **The Branch and Bound Algorithm with Minimum Spanning Tree for TSP**
