@@ -58,7 +58,7 @@ def k_subsets(s, k:int):
     return
 
 
-def lst_argmin(d:dict):
+def min_argmin(d:dict):
     """
         Given a dictionary, it terates over all the values and find that keys with the minimum values. None
         if there is no key.
@@ -73,7 +73,7 @@ def lst_argmin(d:dict):
         if min_value is None or v < min_value:
             min_value = v
             min_key = k
-    return min_key
+    return min_key, min_value
 
 
 class SimpleEuclideanPoints:
@@ -168,7 +168,10 @@ class SimpleEuclideanPoints:
             coordys.append(this.vlabels[v][1])
         plt.plot(coordxs, coordys)
         plt.scatter(coordxs, coordys)
-
+        for id in this.v:
+            txt = str(id)
+            plt.annotate(txt, this.vlabels[id], color='red')
+            pass
         plt.show()
         return this
 
@@ -288,13 +291,13 @@ class DynamicTSP:
         gen = tqdm(range(3, n + 1)) if VERBOSE else range(3, n + 1)
         for k in gen:
             if VERBOSE:
-                print("Constructing k={k}.")
+                print(f"Constructing all Spanning paths of length k={k}.")
             this.construct_subsets()
         full_paths = {}                 # maps the paths to their lengths
         for (S, e), p in this.ptable.items():
-            full_paths[tuple(p + [p[0]])] = this.ctable[S, e] + edge_cost(p[0], p[-1])
+            full_paths[tuple(p + [p[0]])] = this.ctable[S, e] + edge_cost(e[0], e[1])
 
-        return list(lst_argmin(full_paths))
+        return min_argmin(full_paths)
 
 
 def main(name):

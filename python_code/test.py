@@ -78,11 +78,11 @@ def DynamicTSPFull():
     """
     seup = SimpleEuclideanPoints(10)
     dtsp = DynamicTSP(seup.circle().c)
-    soln = dtsp.perform_all()
-    soln_expected = list(range(10)) + [0]
+    soln, opt  = dtsp.perform_all()
     print(f"The TSP solution for Full circle solve is: {soln}. ")
-    assert soln == soln_expected, "Something is wrong with the full TSP solve on the 10 vertex circular solve. " \
-                                    f"expects: {soln_expected}, but have: {soln}"
+    exp_opt = 6.180339887498948
+
+    assert abs(opt - exp_opt) < 1e-15, f"Optimal is too far off, expect {exp_opt} but we have: {exp_opt}"
     return True
 
 
@@ -95,7 +95,7 @@ def FullSolveVisualizations():
     """
     seup = SimpleEuclideanPoints(8)
     dtsp = DynamicTSP(seup.circle().c)
-    soln = dtsp.perform_all()
+    soln, _ = dtsp.perform_all()
     edges = itertools.pairwise(soln)
     seup.visualize_subgraph(list(edges))
     plt.show()
@@ -103,9 +103,47 @@ def FullSolveVisualizations():
     return True
 
 
+def FailedInstanceMinimal():
+    c = {(0, 1): 0.5339452514933004,
+                       (0, 2): 1.013150521747712,
+                       (0, 3): 0.98164738002648,
+                       (1, 2): 0.9553312882099887,
+                       (1, 3): 0.8370739221160245,
+                       (2, 3): 0.17468639488319992}
+    # %%
+    vlabels = {0: (0.972338856500168, 0.4213938625617548),
+     1: (0.6170289875121588, 0.8199568169265171),
+     2: (0.020776902528420016, 0.07353781838380813),
+     3: (0.006195829011062415, 0.24761460848625305)}
+    dtsp = DynamicTSP(c)
+    soln, _ = dtsp.perform_all()
+    edges = itertools.pairwise(soln)
+    seup = SimpleEuclideanPoints(4)
+    seup.vlabels = vlabels
+    seup.v = list(range(4))
+    seup.visualize_subgraph(edges)
+    print("All spanning path at the last iterations sorted:")
+    p2c = []
+    for S, e in dtsp.ctable.keys():
+        p2c.append((dtsp.ptable[S, e], dtsp.ctable[S, e]))
+    p2c = sorted(p2c, key=lambda x: x[1])
+    for p, c in p2c:
+        print(f"{p}|-> {c}")
+
+    return True
+
+
 def run_tests():
     results = []
-    tests = [Test1, Test2, DynamicTSPTestBasic, SimpleGraphTest, DynamicTSPFull, FullSolveVisualizations]
+    tests = [
+        # Test1,
+        # Test2,
+        # DynamicTSPTestBasic,
+        # SimpleGraphTest,
+        # DynamicTSPFull,
+        # FullSolveVisualizations,
+        FailedInstanceMinimal
+    ]
     for test in tests:
         results.append(test())
     for fxn, result in zip(tests, results):
