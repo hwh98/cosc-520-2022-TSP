@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.12.17)  30 NOV 2022 12:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.12.17)  30 NOV 2022 14:43
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -833,7 +833,7 @@ LaTeX Font Warning: Font shape `OMS/cmss/m/n' undefined
 ] [7
 
 ]
-<k_subsets.png, id=143, 541.02126pt x 175.65625pt>
+<k_subsets.png, id=146, 541.02126pt x 175.65625pt>
 File: k_subsets.png Graphic file (type png)
 <use k_subsets.png>
 Package pdftex.def Info: k_subsets.png  used on input line 115.
@@ -842,7 +842,15 @@ Package pdftex.def Info: k_subsets.png  used on input line 115.
 
  </Users/hongdali/Desktop/repos/cosc-520-2022-TSP/dtsp_presentation/k_subsets.png>] [9
 
-] [10
+]
+<sorted_tuple_inner_fxns.png, id=162, 467.7475pt x 217.81375pt>
+File: sorted_tuple_inner_fxns.png Graphic file (type png)
+<use sorted_tuple_inner_fxns.png>
+Package pdftex.def Info: sorted_tuple_inner_fxns.png  used on input line 132.
+(pdftex.def)             Requested size: 284.52756pt x 132.50058pt.
+ [10
+
+ </Users/hongdali/Desktop/repos/cosc-520-2022-TSP/dtsp_presentation/sorted_tuple_inner_fxns.png>] [11
 
 ]
 \tf@nav=\write6
@@ -859,21 +867,21 @@ Package pdftex.def Info: k_subsets.png  used on input line 115.
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `dtsp_presentation.out' has not changed.
-(rerunfilecheck)             Checksum: 53B8269F030F83DB3364CD9ED77A2592;357.
+(rerunfilecheck)             Checksum: 0D94160FF5596EE8975B809277E97AFF;522.
  ) 
 Here is how much of TeX's memory you used:
- 22389 strings out of 478994
- 412301 string characters out of 5858183
- 696140 words of memory out of 5000000
- 39365 multiletter control sequences out of 15000+600000
+ 22388 strings out of 478994
+ 411970 string characters out of 5858183
+ 696137 words of memory out of 5000000
+ 39360 multiletter control sequences out of 15000+600000
  410781 words of font info for 53 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  131i,15n,132p,504b,894s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on /Users/hongdali/Desktop/repos/cosc-520-2022-TSP/dtsp_presentation/dtsp_presentation.pdf (10 pages, 150298 bytes).
+Output written on /Users/hongdali/Desktop/repos/cosc-520-2022-TSP/dtsp_presentation/dtsp_presentation.pdf (11 pages, 194960 bytes).
 PDF statistics:
- 205 PDF objects out of 1000 (max. 8388607)
- 140 compressed objects within 2 object streams
- 24 named destinations out of 1000 (max. 500000)
- 256 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 221 PDF objects out of 1000 (max. 8388607)
+ 153 compressed objects within 2 object streams
+ 27 named destinations out of 1000 (max. 500000)
+ 269 words of extra memory for PDF output out of 10000 (max. 10000000)
 
