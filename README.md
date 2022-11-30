@@ -59,6 +59,11 @@ The notation of the algorithm is as followed:
  * $C*$ is the best tour ever found.
 Our goal is to find the tour that will visited each vertex exactly once, the algorithm is described in algorithm 2. While the pseudo code stated below is formulated as an iterative schem, in our implementation it's implemenedted with recursion to simplify variable in the scope.
 
+###### Algorithm2 MST Branch and Bound for TSP
+
+##
+
+
 $C^* := undefined$<br/>
 $S :={E}$<br/>
 **while** $S \neq \emptyset$ **do**<br/>
@@ -80,6 +85,7 @@ $S :={E}$<br/>
 &nbsp; push $E'\setminus\{e_1}, E'\setminus\{e_2\}, E'\setminus\{e_3\}$ onto $S$<br/>
 **end while**
 
+##
 
 
 ### Installation instruction for this algorithm. 
