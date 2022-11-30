@@ -41,11 +41,14 @@ And the main part of the algorithm started like:
 ---
 ## **The Branch and Bound Algorithm with Minimum Spanning Tree for TSP**
 
-The branch and bound algorithm is based on the principle that we cut off the subset of solution, e.g: feasible suboptimal solution, that is, the total set of feasible solution is partitioned into smaller subset of solution. The smaller subsets can then be evaluated systematically until the best solution is found. 
-To sums up, it stepwise enumerate all the possible candidate solution by exploreing the search space by the means of a decision tree.
-In each node, we will branch and constraint to achieve the sub-problem in the next level, and we will calculate the bound of the following splitted node to see if the feasible solution is better than the solution we found so far to decide whether to update best solution. 
-In general, the branching strategy and the bound calcuation of the node can be obtained in any way. 
-Here, we will use the Minmum Spanning Tree algorithm to decide which vertex we branch on.
+The branch and bound algorithm is based on the principle that we cut off the subset of the solution, e.g: feasible suboptimal solution, that is, the total set of feasible solutions is partitioned into smaller subset of solution. The smaller subsets can then be evaluated systematically until the best solution is found. 
+At the heart of the method, we'll see one of the things we keep track of is the bound. We'll keep track of what a lower bound is or, in other words, the best solution could possibly be. And the bound guarantees that we can solve each sub-problem and find the global optimal.
+
+To sum up, it stepwise enumerates all the possible candidate solutions by exploring the search space by the means of a decision tree.
+In each node, we will branch and constraint to achieve the sub-problem in the next level, and we will calculate the bound of the following splitted node to see if the feasible solution is better than the solution we found so far to decide whether to update the best solution. 
+In general, the branching strategy and the bound calculation of the node can be obtained in any way. 
+Here, we will use the Minimum Spanning Tree algorithm to decide which vertex we branch on.
+
 
 The notation of the algorithm is as followed:
 
