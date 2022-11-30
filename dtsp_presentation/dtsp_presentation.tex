@@ -94,7 +94,7 @@
             \item [3.] Because this dynamic programming is a bottom-up approach, storing the results from previous iterations suffices. We used this strategy for our implementations. 
         \end{itemize}
     \end{frame}
-\subsection{Implementations and some more details}
+\section{Implementations and some more details}
     \begin{frame}{Challenges and their solutions}
         \begin{itemize}
             \item [1.] Generating all subsets $S$ with size $k$ from $V$. 
@@ -108,21 +108,36 @@
         \end{block}
     \end{frame}
     \begin{frame}{k-subsets}
-        This is the inner function of another function that generates subsets given an array. It's a recursive yield function. 
+        This is the inner function of another function that generates subsets given an array. It is a recursive yield function. 
         \begin{center}
             \includegraphics[width=12cm]{k_subsets.png}    
         \end{center}
     \end{frame}
     \begin{frame}{Python Itertools}
-        When I first wrote this, I am unaware of the fact that python ``itertools'' exists and they provides generator for subsets and permutations. 
+        When we first wrote it, we were unaware that python ``itertools'' package exists natively. The package provides generators for subsets and permutations of a set. 
         \vspace{2em}
         \par
         Link is \href{https://docs.python.org/3.10/library/itertools.html}{\textcolor{blue}{here}}. Let's explore it together. 
     \end{frame}
     \begin{frame}{Storing the subsets and i, j}
-        
+        \begin{itemize}
+            \item [1.] Python's dictionary supports multiple arguments. 
+            \item [2.] However, the argument has to be hashable. 
+            \item [3.] We use a sorted ``tuple'' as the key for $C$ to represent the subset $S\subseteq V$. 
+        \end{itemize}
+        Inside the inner functions for carrying out the main algorithm, I use the following functions to index my set: 
+        \begin{center}
+            \includegraphics[width=10cm]{sorted_tuple_inner_fxns.png}
+        \end{center}
     \end{frame}
-    
+
+\section{Some Computational Results}
+    \begin{frame}{google collab, the repo}
+        \begin{itemize}
+            \item The repo containing our code is \href{https://github.com/hwh98/cosc-520-2022-TSP}{\textcolor{blue}{here}}
+            \item We present our results for TSP via dynamic programming with my google collab notebook \href{https://colab.research.google.com/drive/1rDxQ5Vd2Hkc-5de9lT0GVDlrE3TL_uK3?usp=sharing}{\textcolor{blue}{here}}
+        \end{itemize}
+    \end{frame}
 
 
 
