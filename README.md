@@ -113,3 +113,5 @@ We make use of other sources to suppport our project:
 4. [JS LP algorithm](https://github.com/JWally/jsLPSolver)
 
 5. [JS Graph And graph Algorithm](https://github.com/dagrejs/graphlib/wiki#browser-scripts)
+
+6. [Lodash modular utilities.](https://www.jsdelivr.com/package/npm/lodash)
