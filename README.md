@@ -52,8 +52,8 @@ The notation of the algorithm is as followed:
  * $G = (V,E)$ the input undirected graph of TSP.
  * $c : E  \rightarrow  R$ is the weight of the edge should be non-negative.
  * $P \subseteq E$ the path P is the set of edge E.
- * $MST()$ is the minimum spannign tree algorithm, and the $MST(E')$ refer to the algorithm in the subgraph $G(V,E')$
-Our goal is to find the path(tour) that will visited each vertex exactly once.
+ * $MST()$ is the minimum spanning tree algorithm, and the $MST(E')$ refer to the algorithm in the subgraph $G(V,E')$
+Our goal is to find the path (tour) that will visited each vertex exactly once.
 
 The algorithm for finding the solution tour for TSP is as follow:
 1. Set $C*$ as being undefined.
@@ -62,7 +62,7 @@ The algorithm for finding the solution tour for TSP is as follow:
     - Take and remove an item from the stack and call it $E'$
     - IF the graph $G(V,E')$ is not connected, goto(3)
     - Compute $T := MST(E')$
-    - IF T is a path and $c(T) < c(C*) or C* undeined$ 
+    - IF T is a path and $c(T) < c(C*) or C* undefined$ 
         THEN update $C* := T and goto (3)
     - IF $T$ is a path and $c(T) >= c(C*)$ 
         THEN goto (3)
