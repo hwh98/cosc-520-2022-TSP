@@ -63,23 +63,23 @@ $C^* := undefined$<br/>
 $S :={E}$<br/>
 **while** $S \neq \emptyset$ **do**<br/>
 &nbsp; Take top $E' \in S$ <br/>
-&nbsp; *if* $G(V,E')$ is disconnected *then*<br/>
-&nbsp; &nbsp; *continue* {Prune by infeasibility}<br/>
+&nbsp; **if** $G(V,E')$ is disconnected **then** <br/>
+&nbsp; &nbsp; **continue** {Prune by infeasibility}<br/>
 &nbsp; **end if**<br/>
 &nbsp; Compute $M:=MST(E')$<br/>
-&nbsp; *if* $M$ is a spanning bath *then*<br/>
+&nbsp; **if** $M$ is a spanning bath **then**<br/>
 &nbsp; &nbsp; Let $T$ be th tour by joining the end points of th path $M$<br/>
-&nbsp; &nbsp; *if* $C(T) < C(C*)$ *then*<br/>
-&nbsp; &nbsp; &nbsp; $C^*:= T {New,better tour found$<br/>
+&nbsp; &nbsp; **if** $C(T)<C$ **then**<br/>
+&nbsp; &nbsp; &nbsp; $C^*:= T$ {New,better tour found}<br/>
 &nbsp; &nbsp; **end if**<br/>
-&nbsp; *if* $M$ is a path and $c(T) \ge c(C^*)$ *then*<br/>
-&nbsp; &nbsp; *continue* {Pruned by sub-optimality}<br/>
+&nbsp; **if** $M$ is a path and $c(T) \ge c(C^*)$ **then**<br/>
+&nbsp; &nbsp; **continue** {Pruned by sub-optimality}<br/>
 &nbsp; **end if**<br/>
 &nbsp; let $v \subset V$ be a vertex incident to at least 3 edges in $T$<br/>
 &nbsp; Let $e_1, e_2, e_3 \subseteq \delta(V) \cap T$ be edges that are incident to $v$ in $T$<br/>
 &nbsp; push $E'\setminus\{e_1}, E'\setminus\{e_2\}, E'\setminus\{e_3\}$ onto $S$<br/>
 **end while**
-```
+
 
 
 ### Installation instruction for this algorithm. 
