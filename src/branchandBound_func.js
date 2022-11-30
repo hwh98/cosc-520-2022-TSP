@@ -19,12 +19,12 @@ function branchandBound(bb_g){ //bb_g is the global original graph.
     var mst = kruskal.mst;
     let mst_result = new jsgraphs.Graph(bb_g.V);
     let mst_cost = 0;
-    console.log("MST result - "+ mst.length+" edges generated in a " + bb_g.V +" vertexs graph.");
+    //console.log("MST result - "+ mst.length+" edges generated in a " + bb_g.V +" vertexs graph.");
     for(let i=0; i < mst.length; ++i) { // iterate the MST edge to create the MST graph
         var e = mst[i];
         var v = e.either();
         var w = e.other(v);
-        console.log('(' + v + ', ' + w + '): ' + e.weight);
+        //console.log('(' + v + ', ' + w + '): ' + e.weight);
         mst_result.addEdge(w, v);
         mst_cost += e.weight;
     }
@@ -34,7 +34,7 @@ function branchandBound(bb_g){ //bb_g is the global original graph.
             // check tour, and the tour cost 
             let tourfinalcost = calculatetourcost(mst_result, mst_cost);
             if(tourfinalcost < glob_lowerbound){
-                console.log("Update tour and cost.")
+                //console.log("Update tour and cost.")
                 glob_lowerbound = tourfinalcost;// update tour
                 glob_tour = getTour(mst);
             }
