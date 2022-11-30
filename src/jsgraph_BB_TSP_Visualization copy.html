@@ -22,6 +22,7 @@
         <button onclick="creategraph()" id="numVertexbut">Generate the graph</button>
         <p id="solButton"></p>
         <p id="t_cost">  </p>
+        <p id="numofTree"></p>
         <p id="exec_time">  </p>
         <div id="mynetwork"></div>
         
@@ -29,7 +30,6 @@
             var g;
             var g_nodes = [];
             var g_edges = [];
-            
             /**
              * @desc the function create the first random graph and visualize the it.
              *      The part will only be executed by click "Generate the graph" button.
@@ -100,12 +100,13 @@
                 //Run branch and bound 
                 let tourcost;
                 let bb_tour;
-                [bb_tour, tourcost] = branchandBound(g)
+                let numofmst;
+                [bb_tour, tourcost, numofmst] = branchandBound(g)
                 let endTime = performance.now()
-                console.log(`Call to doSomething took ${endTime - startTime} milliseconds`)
+                //console.log(`Call to doSomething took ${endTime - startTime} milliseconds`)
                 document.getElementById("t_cost").innerHTML = "The tour cost of the "+ document.getElementById("numofVertex").value +" vertices graph is " + tourcost;
                 document.getElementById("exec_time").innerHTML = "It takes " + (endTime - startTime) +" milliseconds to find the solution";
-
+                document.getElementById("numofTree").innerHTML = "It generates " + numofmst + " MSTs";
                 // Visualization of branch and bound solution
                 g_edges = [];
                 for(let i=0; i < bb_tour.length; ++i) {
@@ -115,7 +116,7 @@
                     let weight = g.edge(v,w).weight;
                     //e.highlighted = true;
                     g.adj(v)[w-1].highlighted = true; // avoid the duplicate edge
-                    console.log('(' + v + ', ' + w + '): ' + weight);
+                    //console.log('(' + v + ', ' + w + '): ' + weight);
                     g_edges.push({
                         from: v,
                         to: w,
