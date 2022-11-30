@@ -1,7 +1,8 @@
-### **Intro**
+### **Introduction**
 
-This repo is for the final project of COSP 520 2022 Winter Term 1. We are doing something about the Traveling Salesman Problem. 
-
+The travelling salesman problem is a canonical computational problem and gained intense
+research interest over the decades. We will state the travelling salesman problem along with
+some terminologies here, along with some preliminary analysis of the algorithm
 ---
 ## **The Dynamic Programming Algorithm for TSP**
 
