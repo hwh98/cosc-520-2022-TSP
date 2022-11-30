@@ -55,24 +55,34 @@ The notation of the algorithm is as followed:
  * $G = (V,E)$ the input undirected graph of TSP.
  * $c : E  \rightarrow  R$ is the weight of the edge should be non-negative.
  * $P \subseteq E$ the path P is the set of edge E.
- * $MST()$ is the minimum spanning tree algorithm, and the $MST(E')$ refer to the algorithm in the subgraph $G(V,E')$
-Our goal is to find the path (tour) that will visited each vertex exactly once.
+ * $\text{MST}(\cdots)$ is the minimum spanning tree algorithm, and the $MST(E')$ refer to the algorithm in the subgraph $G(V,E')$
+ * $C*$ is the best tour ever found.
+Our goal is to find the tour that will visited each vertex exactly once, the algorithm is described in algorithm 2. While the pseudo code stated below is formulated as an iterative schem, in our implementation it's implemenedted with recursion to simplify variable in the scope.
 
-The algorithm for finding the solution tour for TSP is as follow:
-1. Set $C*$ as being undefined.
-2. Initialized a stack with ${E}$ randomly.
-3. WHILE stack is no-empty DO
-    - Take and remove an item from the stack and call it $E'$
-    - IF the graph $G(V,E')$ is not connected, goto(3)
-    - Compute $T := MST(E')$
-    - IF T is a path and $c(T) < c(C*) or C* undefined$ 
-        THEN update $C* := T and goto (3)
-    - IF $T$ is a path and $c(T) >= c(C*)$ 
-        THEN goto (3)
-    - Let $v \in V$ be a node that is incident to at least 3 edges in $T$
-    - Let $e1, e2, e3 \subseteq \delta(V) \bigcap T$ be 3 edges that are incident to $v$ in $T$
-    - Put the $E'$ {e1}, $E'$ {e2}, $E'$ {e3} on the stack
-12. Return $C*$
+$C^* := undefined$
+
+$S :={E}$
+
+**while** $S \neq \emptyset$ **do**
+
+Take top $E' \in S$ <br/>
+*if* $G(V,E')$ is disconnected *then*<br/>
+    *continue* {Prune by infeasibility}<br/>
+**end if**<br/>
+Compute $M:=MST(E')$<br/>
+*if* $M$ is a spanning bath *then*<br/>
+Let $T$ be th tour by joining the end points of th path $M$<br/>
+*if* $C(T) < C(C*)$ *then*<br/>
+$C^*:= T {New,better tour found$<br/>
+**end if**<br/>
+*if* $M$ is a path and $c(T) \ge c(C^*)$ *then*<br/>
+*continue* {Pruned by sub-optimality}<br/>
+**end if**<br/>
+let $v \subset V$ be a vertex incident to at least 3 edges in $T$<br/>
+Let $e_1, e_2, e_3 \subseteq \delta(V) \cap T$ be edges that are incident to $v$ in $T$<br/>
+push $E'\setminus\{e_1}, E'\setminus\{e_2\}, E'\setminus\{e_3\}$ onto $S$<br/>
+**end while**
+
 
 ### Installation instruction for this algorithm. 
 
