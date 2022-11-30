@@ -2,13 +2,14 @@ var glob_lowerbound = Infinity;// the best cost so far.
 var glob_tour;// solution tour
 var origin_g;// original graph
 var numofvertex;//number of vertex 
-
+var numofmstTree=0;// number of mst tree.
 
 /**
  * @desc the branch and bound function.
  * @param {bb_g} is a jsgraphs.WeightedGraph() object. It's the original graph for the branch and bound.
  * @return {glob_tour} is the tour solution of the TSP problem.
  * @returns {glob_loowerbound} is the cost of the solution.
+ * @returns {numofmstTree} is the number of MST.
  */
 function branchandBound(bb_g){ //bb_g is the global original graph.
     origin_g = _.cloneDeep(bb_g)
@@ -16,6 +17,7 @@ function branchandBound(bb_g){ //bb_g is the global original graph.
 
     // MST
     var kruskal = new jsgraphs.KruskalMST(bb_g); 
+    numofmstTree+=1;
     var mst = kruskal.mst;
     let mst_result = new jsgraphs.Graph(bb_g.V);
     let mst_cost = 0;
@@ -56,7 +58,8 @@ function branchandBound(bb_g){ //bb_g is the global original graph.
     }    
     //console.log("The overall tour for TSP ", glob_tour)
     //console.log("Cost " + glob_lowerbound)
-    return [glob_tour, glob_lowerbound]
+    console.log("# of MST tree:" + numofmstTree)
+    return [glob_tour, glob_lowerbound, numofmstTree]
 }
 
 /**
@@ -73,6 +76,8 @@ function bbRecursion(recur_g, b_vertex, adjacent_vertex){
 
     // MST
     let kruskal = new jsgraphs.KruskalMST(recur_g); 
+    numofmstTree+=1;
+
     let mst = kruskal.mst;
     let mst_result = new jsgraphs.Graph(recur_g.V);
     let mst_cost = 0;
