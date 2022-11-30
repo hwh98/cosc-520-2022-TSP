@@ -84,7 +84,7 @@ The algorithm for finding the solution tour for TSP is as follow:
 ### **Reference and Sources**
 
 
-1.[A dynamic programming approach to sequencing problems](https://epubs.siam.org/doi/abs/10.1137/0110015?journalCode=smjmap.1)
+1. [A dynamic programming approach to sequencing problems](https://epubs.siam.org/doi/abs/10.1137/0110015?journalCode=smjmap.1)
 
 2. Jon Kleinberg and Éva Tardos. Algorithm design. MTM, 2022
 
