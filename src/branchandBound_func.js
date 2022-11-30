@@ -143,7 +143,7 @@ function istour(fea_g){
                 onedegreevertex++;
             }
             else{
-                console.log("The connected edge is not a tour.");
+                //console.log("The connected edge is not a tour.");
                 return false;    
             }
         }
