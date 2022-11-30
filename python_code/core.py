@@ -36,6 +36,8 @@ def k_combinatorics(n:int, k:int):
             already_chosen.append(a[I])
             yield from inner_recur(a, k - 1, I + 1, already_chosen)
             already_chosen.pop()
+
+            
         return
 
     yield from inner_recur([I for I in range(n)], k, 0, [])
