@@ -102,7 +102,7 @@
                 let bb_tour;
                 [bb_tour, tourcost] = branchandBound(g)
                 let endTime = performance.now()
-                console.log(`Call to doSomething took ${endTime - startTime} milliseconds`)
+                //console.log(`Call to doSomething took ${endTime - startTime} milliseconds`)
                 document.getElementById("t_cost").innerHTML = "The tour cost of the "+ document.getElementById("numofVertex").value +" vertices graph is " + tourcost;
                 document.getElementById("exec_time").innerHTML = "It takes " + (endTime - startTime) +" milliseconds to find the solution";
 
@@ -115,7 +115,7 @@
                     let weight = g.edge(v,w).weight;
                     //e.highlighted = true;
                     g.adj(v)[w-1].highlighted = true; // avoid the duplicate edge
-                    console.log('(' + v + ', ' + w + '): ' + weight);
+                    //console.log('(' + v + ', ' + w + '): ' + weight);
                     g_edges.push({
                         from: v,
                         to: w,
