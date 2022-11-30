@@ -86,6 +86,8 @@ The algorithm for finding the solution tour for TSP is as follow:
 We make use of the 2 of the other repos to suppport our project: 
 1.[A dynamic programming approach to sequencing problems](https://epubs.siam.org/doi/abs/10.1137/0110015?journalCode=smjmap.1)
 2. Jon Kleinberg and Éva Tardos. Algorithm design. MTM, 2022
+
+We make use of other sources to suppport our project:
 3. [JS graph algorithms](https://github.com/chen0040/js-graph-algorithms)
 4. [JS LP algorithm](https://github.com/JWally/jsLPSolver)
 5. [JS Graph And graph Algorithm](https://github.com/dagrejs/graphlib/wiki#browser-scripts)
