@@ -59,29 +59,27 @@ The notation of the algorithm is as followed:
  * $C*$ is the best tour ever found.
 Our goal is to find the tour that will visited each vertex exactly once, the algorithm is described in algorithm 2. While the pseudo code stated below is formulated as an iterative schem, in our implementation it's implemenedted with recursion to simplify variable in the scope.
 
-$C^* := undefined$
-
-$S :={E}$
-
-**while** $S \neq \emptyset$ **do**
-
-Take top $E' \in S$ <br/>
-*if* $G(V,E')$ is disconnected *then*<br/>
-    *continue* {Prune by infeasibility}<br/>
-**end if**<br/>
-Compute $M:=MST(E')$<br/>
-*if* $M$ is a spanning bath *then*<br/>
-Let $T$ be th tour by joining the end points of th path $M$<br/>
-*if* $C(T) < C(C*)$ *then*<br/>
-$C^*:= T {New,better tour found$<br/>
-**end if**<br/>
-*if* $M$ is a path and $c(T) \ge c(C^*)$ *then*<br/>
-*continue* {Pruned by sub-optimality}<br/>
-**end if**<br/>
-let $v \subset V$ be a vertex incident to at least 3 edges in $T$<br/>
-Let $e_1, e_2, e_3 \subseteq \delta(V) \cap T$ be edges that are incident to $v$ in $T$<br/>
-push $E'\setminus\{e_1}, E'\setminus\{e_2\}, E'\setminus\{e_3\}$ onto $S$<br/>
+$C^* := undefined$<br/>
+$S :={E}$<br/>
+**while** $S \neq \emptyset$ **do**<br/>
+&nbsp; Take top $E' \in S$ <br/>
+&nbsp; *if* $G(V,E')$ is disconnected *then*<br/>
+&nbsp; &nbsp; *continue* {Prune by infeasibility}<br/>
+&nbsp; **end if**<br/>
+&nbsp; Compute $M:=MST(E')$<br/>
+&nbsp; *if* $M$ is a spanning bath *then*<br/>
+&nbsp; &nbsp; Let $T$ be th tour by joining the end points of th path $M$<br/>
+&nbsp; &nbsp; *if* $C(T) < C(C*)$ *then*<br/>
+&nbsp; &nbsp; &nbsp; $C^*:= T {New,better tour found$<br/>
+&nbsp; &nbsp; **end if**<br/>
+&nbsp; *if* $M$ is a path and $c(T) \ge c(C^*)$ *then*<br/>
+&nbsp; &nbsp; *continue* {Pruned by sub-optimality}<br/>
+&nbsp; **end if**<br/>
+&nbsp; let $v \subset V$ be a vertex incident to at least 3 edges in $T$<br/>
+&nbsp; Let $e_1, e_2, e_3 \subseteq \delta(V) \cap T$ be edges that are incident to $v$ in $T$<br/>
+&nbsp; push $E'\setminus\{e_1}, E'\setminus\{e_2\}, E'\setminus\{e_3\}$ onto $S$<br/>
 **end while**
+```
 
 
 ### Installation instruction for this algorithm. 
