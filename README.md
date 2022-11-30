@@ -64,8 +64,9 @@ Our goal is to find a tour that visits all vertices once, the algorithm is descr
 rithm 2. While the pseudo code stated below is formulated as an iterative scheme, in our
 implementation it’s implemented with recursion to simplify variables in the scope.
 
-Algorithm 2 MST Branch and Bound for TSP
 ##
+Algorithm 2 MST Branch and Bound for TSP
+
 
 &nbsp; $C^\* := undefined$<br/>
 &nbsp; $S:={E}$<br/>
