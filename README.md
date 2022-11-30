@@ -61,8 +61,8 @@ Our goal is to find the tour that will visited each vertex exactly once, the alg
 
 
 Algorithm2 MST Branch and Bound for TSP
-##
 
+##
 
 $C^* := undefined$<br/>
 $S :={E}$<br/>
