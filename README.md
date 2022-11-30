@@ -79,9 +79,14 @@ The algorithm for finding the solution tour for TSP is as follow:
 (npm libs) lodash, jest, jest-regex-util , python(for python httpserver, ...)
 
 ---
-### **Sources**
+### **Reference and Sources**
 
 We make use of the 2 of the other repos to suppport our project: 
-1. JS graph algorithms: [here](https://github.com/chen0040/js-graph-algorithms)
-2. JS LP algorithm: [here](https://github.com/JWally/jsLPSolver)
-3. JS Graph And graph Algorithm: [here](https://github.com/dagrejs/graphlib/wiki#browser-scripts)
+1. Michael Held and Richard M. Karp. A dynamic programming approach to sequencing
+problems. Society for Industrial and Applied Mathematics.Journal of the Society of In-
+dustrial and Applied Mathematics, 10(1):196–15, 03 1962. Copyright - Copyright] © 1962
+Society for Industrial and Applied Mathematics; Last updated - 2022-10-20
+2. Jon Kleinberg and Éva Tardos. Algorithm design. MTM, 2022.
+3. [JS graph algorithms](https://github.com/chen0040/js-graph-algorithms)
+4. [JS LP algorithm](https://github.com/JWally/jsLPSolver)
+5. [JS Graph And graph Algorithm](https://github.com/dagrejs/graphlib/wiki#browser-scripts)
