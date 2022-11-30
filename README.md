@@ -57,10 +57,10 @@ The notation of the algorithm is as followed:
  * $P \subseteq E$ the path P is the set of edge E.
  * $\text{MST}(\cdots)$ is the minimum spanning tree algorithm, and the $MST(E')$ refer to the algorithm in the subgraph $G(V,E')$
  * $C^*$ is the best tour ever found.
-Our goal is to find the tour that will visited each vertex exactly once, the algorithm is described in algorithm 2. While the pseudo code stated below is formulated as an iterative schem, in our implementation it's implemenedted with recursion to simplify variable in the scope.
+Our goal is to find the tour that will visited each vertex exactly once, the algorithm is described in algorithm 2. While the pseudo code stated below is formulated as an iterative schem, in our implementation it's implemenedted with recursion to simplify variable in the scope. <br/> <br/>
 
-###### Algorithm2 MST Branch and Bound for TSP
 
+Algorithm2 MST Branch and Bound for TSP
 ##
 
 
