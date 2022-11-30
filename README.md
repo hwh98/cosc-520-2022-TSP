@@ -1,8 +1,10 @@
-### **Intro**
-
-This repo is for the final project of COSP 520 2022 Winter Term 1. We are doing something about the Traveling Salesman Problem. 
+## **Introduction**
+The travelling salesman problem is a canonical computational problem and gained intense
+research interest over the decades. We will state the travelling salesman problem along with
+some terminologies here, along with some preliminary analysis of the algorithm
 
 ---
+
 ## **The Dynamic Programming Algorithm for TSP**
 
 We define a graph $G = (V, E)$, a weighted undirected graph, then we consider the recursive table: 
@@ -56,32 +58,56 @@ The notation of the algorithm is as followed:
  * $c : E  \rightarrow  R$ is the weight of the edge should be non-negative.
  * $P \subseteq E$ the path P is the set of edge E.
  * $MST()$ is the minimum spannign tree algorithm, and the $MST(E')$ refer to the algorithm in the subgraph $G(V,E')$
-Our goal is to find the path(tour) that will visited each vertex exactly once.
+ * $C^\*$ the best tour ever found.
 
-The algorithm for finding the solution tour for TSP is as follow:
-1. Set $C*$ as being undefined.
-2. Initialized a stack with ${E}$ randomly.
-3. WHILE stack is no-empty DO
-    - Take and remove an item from the stack and call it $E'$
-    - IF the graph $G(V,E')$ is not connected, goto(3)
-    - Compute $T := MST(E')$
-    - IF T is a path and $c(T) < c(C*) or C* undeined$ 
-        THEN update $C* := T and goto (3)
-    - IF $T$ is a path and $c(T) >= c(C*)$ 
-        THEN goto (3)
-    - Let $v \in V$ be a node that is incident to at least 3 edges in $T$
-    - Let $e1, e2, e3 \subseteq \delta(V) \bigcap T$ be 3 edges that are incident to $v$ in $T$
-    - Put the $E'$ {e1}, $E'$ {e2}, $E'$ {e3} on the stack
-12. Return $C*$
+Our goal is to find a tour that visits all vertices once, the algorithm is described in algo-
+rithm 2. While the pseudo code stated below is formulated as an iterative scheme, in our
+implementation it’s implemented with recursion to simplify variables in the scope.
+
+Algorithm 2 MST Branch and Bound for TSP
+##
+
+&nbsp; $C^\* := undefined$<br/>
+&nbsp; $S:={E}$<br/>
+&nbsp; **while** $S \neq \emptyset$ **then**<br/>
+&nbsp; &nbsp; Take top $E' \in S$<br/>
+&nbsp; &nbsp; **if** $G(V,E')$ is disconnected **then**<br/>
+&nbsp; &nbsp; &nbsp; **continue** {Prune by infeasibility}<br/>
+&nbsp; &nbsp; **end if**<br/>
+&nbsp; &nbsp; Compute $M:=MST(E')**<br/>
+&nbsp; &nbsp; **if** $M$ is a spanning path **then**<br/>
+&nbsp; &nbsp; &nbsp; Let $T$ be the tour by joining the end points of the path $M$<br/>
+&nbsp; &nbsp; &nbsp; **if** $C(T) < C(C^\*)$ **then**<br/>
+&nbsp; &nbsp; &nbsp; &nbsp;  $C^\*:=T${New, bettwer tour found}<br/>
+&nbsp; &nbsp; &nbsp; **end if**<br/>
+&nbsp; &nbsp; **end if**<br/>
+&nbsp; &nbsp; **if** $M$ is a path and $c(T) \ge c(C^\*)$ **then**<br/>
+&nbsp; &nbsp; &nbsp; **continute** {Pruned by sub-optimality}<br/>
+&nbsp; &nbsp; **end if**<br/>
+&nbsp; &nbsp; Let $v \subset V$ be a vertex incident to at least 3 edges in $T$<br/>
+&nbsp; &nbsp; Let $e_1, e_2, e_3 \subseteq \delta(V) \cap T$ be edges that are incident to $v$ in $T$<br/>
+&nbsp; &nbsp; push $E'\setminus\{e_1}, E'\setminus\{e_2\}, E'\setminus\{e_3\}$ onto $S$<br/>
+&nbsp; **end while**<br/>
+
+
+
 
 ### Installation instruction for this algorithm. 
 
 (npm libs) lodash, jest, jest-regex-util , python(for python httpserver, ...)
 
 ---
-### **Sources**
+### **Reference and Sources**
 
-We make use of the 2 of the other repos to suppport our project: 
-1. JS graph algorithms: [here](https://github.com/chen0040/js-graph-algorithms)
-2. JS LP algorithm: [here](https://github.com/JWally/jsLPSolver)
-3. JS Graph And graph Algorithm: [here](https://github.com/dagrejs/graphlib/wiki#browser-scripts)
+
+1. [A dynamic programming approach to sequencing problems](https://epubs.siam.org/doi/abs/10.1137/0110015?journalCode=smjmap.1)
+
+2. Jon Kleinberg and Éva Tardos. Algorithm design. MTM, 2022
+
+We make use of other sources to suppport our project:
+
+3. [JS graph algorithms](https://github.com/chen0040/js-graph-algorithms)
+
+4. [JS LP algorithm](https://github.com/JWally/jsLPSolver)
+
+5. [JS Graph And graph Algorithm](https://github.com/dagrejs/graphlib/wiki#browser-scripts)
