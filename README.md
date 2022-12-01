@@ -91,13 +91,13 @@ Algorithm 2 MST Branch and Bound for TSP
 
 ### Installation instruction for this algorithm. 
 
-Under the project directory, follow the instructions below to setup the environment for B&B visualization 
+Under the project directory, follow the instructions below to setup the environment for Branch and Bound visualization 
 
-Install node.js, which includes NPM package manager for the javascript, locate [here](https://nodejs.org/en/download/)
+Install node.js, which includes NPM package manager for the javascript, from [here](https://nodejs.org/en/download/)
 
-For windows operating system, see [here](https://phoenixnap.com/kb/install-node-js-npm-on-windows)
+For windows operating system, download the file and follow the instruction [here](https://phoenixnap.com/kb/install-node-js-npm-on-windows)
 
-For Mac operating system, see [here](https://radixweb.com/blog/installing-npm-and-nodejs-on-windows-and-mac), or you can install it with homebrew.
+For Mac operating system, you can either download the file and follow the [instruction](https://radixweb.com/blog/installing-npm-and-nodejs-on-windows-and-mac), or you can install it with homebrew.
 > brew install node
 
 After install the node.js, you can check if the NPM is also installed successfully by
