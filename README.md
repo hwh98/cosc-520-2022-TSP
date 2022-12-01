@@ -115,7 +115,7 @@ Once you go through the installation instructions, you can open the jsgraph_BB_T
 
 2. Jon Kleinberg and Éva Tardos. Algorithm design. MTM, 2022
 
-We make use of other sources to suppport our project:
+Referenced library and package:
 
 3. [JS graph algorithms](https://github.com/chen0040/js-graph-algorithms)
 
