@@ -97,7 +97,7 @@ Install node.js, which includes NPM package manager for the javascript, from [he
 
 For windows operating system, download the file and follow the instruction [here](https://phoenixnap.com/kb/install-node-js-npm-on-windows)
 
-For Mac operating system, you can either download the file and follow the [instruction](https://radixweb.com/blog/installing-npm-and-nodejs-on-windows-and-mac), or you can install it with homebrew.
+For Mac user, you can either download the file and follow the [instruction](https://radixweb.com/blog/installing-npm-and-nodejs-on-windows-and-mac), or you can install it with homebrew.
 > brew install node
 
 After install the node.js, you can check if the NPM is also installed successfully by
