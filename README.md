@@ -1,4 +1,4 @@
-### **Intro**
+### **Introduction**
 
 This repo is for the final project of COSP 520 2022 Winter Term 1. We are doing something about the Traveling Salesman Problem. 
 
@@ -93,8 +93,12 @@ Algorithm 2 MST Branch and Bound for TSP
 
 Under the project directory, follow the instructions below to setup the environment for B&B visualization 
 
-Install node.js, which includes NPM package manager for the javascript. See [here](https://nodejs.org/en/download/)
-> brew install npm
+Install node.js, which includes NPM package manager for the javascript, locate [here](https://nodejs.org/en/download/)
+
+For windows operating system, see [here](https://phoenixnap.com/kb/install-node-js-npm-on-windows)
+
+For Mac operating system, see [here](https://radixweb.com/blog/installing-npm-and-nodejs-on-windows-and-mac), or you can install it with homebrew.
+> brew install node
 
 After install the node.js, you can check if the NPM is also installed successfully by
 > npm version
@@ -102,10 +106,10 @@ After install the node.js, you can check if the NPM is also installed successful
 Install the package for graph processing.
 > npm install js-graph-algorithms
 
-Install the package for deep clone the graph.
+Install the package for deep cloning the graph.
 > npm install lodash
 
-Once you go through the installation instruction, you can open the jsgraph_BB_TSP_Visualization.html with Safari or Chrome web browser.
+Once you go through the installation instructions, you can open the jsgraph_BB_TSP_Visualization.html with Safari or Chrome web browser.
 
 ---
 ### **Reference and Sources**
