@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1669848228 "/Users/hongdali/Desktop/repos/cosc-520-2022-TSP/dtsp_presentation/dtsp_presentation.tex" "/Users/hongdali/Desktop/repos/cosc-520-2022-TSP/dtsp_presentation/dtsp_presentation.pdf" "dtsp_presentation" 1669848229
+["pdflatex"] 1669848228 "/Users/hongdali/Desktop/repos/cosc-520-2022-TSP/dtsp_presentation/dtsp_presentation.tex" "/Users/hongdali/Desktop/repos/cosc-520-2022-TSP/dtsp_presentation/dtsp_presentation.pdf" "dtsp_presentation" 1669854884
   "/Users/hongdali/Desktop/repos/cosc-520-2022-TSP/dtsp_presentation/dtsp_presentation.aux" 1669848229 3438 183f9595ae64e3bf725c57d0cea542b6 ""
   "/Users/hongdali/Desktop/repos/cosc-520-2022-TSP/dtsp_presentation/dtsp_presentation.tex" 1669848226 5889 2304fcc59a474fd1359f977fd40f3794 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -216,15 +216,12 @@
   "k_subsets.png" 1669841181 60913 d299fe7a5d882c7fe8b4628fcbe40991 ""
   "sorted_tuple_inner_fxns.png" 1669842445 72056 8939e2795feca4f0a307f1a4a48e730c ""
   (generated)
-  "dtsp_presentation.nav"
-  "dtsp_presentation.toc"
-  "dtsp_presentation.snm"
-  "dtsp_presentation.pdf"
-  "/Users/hongdali/Desktop/repos/cosc-520-2022-TSP/dtsp_presentation/dtsp_presentation.log"
   "dtsp_presentation.log"
   "/Users/hongdali/Desktop/repos/cosc-520-2022-TSP/dtsp_presentation/dtsp_presentation.pdf"
   "dtsp_presentation.aux"
+  "dtsp_presentation.pdf"
+  "dtsp_presentation.toc"
   "dtsp_presentation.out"
-  "dtsp_presentation.aux"
-  "dtsp_presentation.log"
   "/Users/hongdali/Desktop/repos/cosc-520-2022-TSP/dtsp_presentation/dtsp_presentation.log"
+  "dtsp_presentation.snm"
+  "dtsp_presentation.nav"

@@ -105,23 +105,30 @@ def FullSolveVisualizations():
 
 def FailedInstanceMinimal():
     c = {(0, 1): 0.5339452514933004,
-                       (0, 2): 1.013150521747712,
-                       (0, 3): 0.98164738002648,
-                       (1, 2): 0.9553312882099887,
-                       (1, 3): 0.8370739221160245,
-                       (2, 3): 0.17468639488319992}
+           (0, 2): 1.013150521747712,
+           (0, 3): 0.98164738002648,
+           (1, 2): 0.9553312882099887,
+           (1, 3): 0.8370739221160245,
+           (2, 3): 0.17468639488319992}
     # %%
     vlabels = {0: (0.972338856500168, 0.4213938625617548),
      1: (0.6170289875121588, 0.8199568169265171),
      2: (0.020776902528420016, 0.07353781838380813),
      3: (0.006195829011062415, 0.24761460848625305)}
     dtsp = DynamicTSP(c)
-    soln, _ = dtsp.perform_all()
+    # for _ in range(3, 5):
+    #     for k, v in dtsp.ctable.items():
+    #         print(f"{k}|->{v}, p: {dtsp.ptable[k]}")
+    #     dtsp.construct_subsets()
+    # for k, v in dtsp.ctable.items():
+    #     print(f"{k}|->{v}, p: {dtsp.ptable[k]}")
+    # ==================================================================================================================
+    soln, opt = dtsp.perform_all()
     edges = itertools.pairwise(soln)
     seup = SimpleEuclideanPoints(4)
     seup.vlabels = vlabels
     seup.v = list(range(4))
-    seup.visualize_subgraph(edges)
+    seup.visualize_subgraph(soln)
     print("All spanning path at the last iterations sorted:")
     p2c = []
     for S, e in dtsp.ctable.keys():
@@ -129,6 +136,7 @@ def FailedInstanceMinimal():
     p2c = sorted(p2c, key=lambda x: x[1])
     for p, c in p2c:
         print(f"{p}|-> {c}")
+    print(f"edges: {soln}")
 
     return True
 

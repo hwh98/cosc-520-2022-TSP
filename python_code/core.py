@@ -153,7 +153,7 @@ class SimpleEuclideanPoints:
             return None
         return this.__cost.copy()
 
-    def visualize_subgraph(this, edges):
+    def visualize_subgraph(this, vertices):
         """
             Given a set of edges, visualize the subgraph and plot it on a window or something.
         :param edges:
@@ -162,12 +162,12 @@ class SimpleEuclideanPoints:
             the instance itself.
         """
         # TODO: Test this functions.
-        assert edges is not None, "Can't plot None, please check what you passed into visualize_subgraph. "
-        coordxs = [this.vlabels[0][0]]
-        coordys = [this.vlabels[0][1]]
-        for _, v in edges:
-            coordxs.append(this.vlabels[v][0])
-            coordys.append(this.vlabels[v][1])
+        assert vertices is not None, "Can't plot None, please check what you passed into visualize_subgraph. "
+        coordxs = []
+        coordys = []
+        for v_id in vertices:
+            coordxs.append(this.vlabels[v_id][0])
+            coordys.append(this.vlabels[v_id][1])
         plt.plot(coordxs, coordys)
         plt.scatter(coordxs, coordys)
         for id in this.v:
@@ -218,7 +218,8 @@ class DynamicTSP:
         c = {}          # a new, digested edge cost table, all edges must be ordered pairs.
         for e, cost in this.c.items():
             c[tuple(sorted(e))] = this.ctable[tuple(sorted(e)), tuple(sorted(e))] = cost
-            this.ptable[tuple(sorted(e)), tuple(sorted(e))] = list(e)
+            this.ptable[tuple(sorted(e)), (e[0], e[1])] = [e[0], e[1]]
+            this.ptable[tuple(sorted(e)), (e[1], e[0])] = [e[1], e[0]]
             vertices.add(e[0]); vertices.add(e[1])
         this.v = sorted(vertices)
         assert all([isinstance(item, int) for item in this.v]), "The cost table is giving identifiers for vertices " \
@@ -249,7 +250,7 @@ class DynamicTSP:
             return this.ctable[S, tuple(sorted([i, j]))]
 
         def P(S, i, j): # get path
-            return this.ptable[S, tuple(sorted([i, j]))]
+            return this.ptable[S, tuple([i, j])]
 
         def edge_cost(i, j):
             return this.c[tuple(sorted([i, j]))]
@@ -272,6 +273,7 @@ class DynamicTSP:
                         min_cost = cost
                 ctable[tuple(S), (i, j)] = min_cost
                 ptable[tuple(S), (i, j)] = min_path
+                ptable[tuple(S), (j, i)] = min_path[::-1]
                 if min_path is None:
                     raise Exception("The graph is disconnected.")
         this.ptable = ptable
@@ -297,7 +299,7 @@ class DynamicTSP:
             this.construct_subsets()
         full_paths = {}                 # maps the paths to their lengths
         for (S, e), p in this.ptable.items():
-            full_paths[tuple(p + [p[0]])] = this.ctable[S, e] + edge_cost(e[0], e[1])
+            full_paths[tuple(p + [p[0]])] = this.ctable[S, tuple(sorted(list(e)))] + edge_cost(e[0], e[1])
 
         return min_argmin(full_paths)
 
