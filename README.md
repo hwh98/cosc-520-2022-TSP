@@ -105,7 +105,7 @@ Install the package for graph processing.
 Install the package for deep clone the graph.
 > npm install lodash
 
-Once you go through the installation instruction, you can open the $jsgraph_BB_TSP_Visualization.html$ with Safari or Chrome web browser.
+Once you go through the installation instruction, you can open the jsgraph_BB_TSP_Visualization.html with Safari or Chrome web browser.
 
 ---
 ### **Reference and Sources**
