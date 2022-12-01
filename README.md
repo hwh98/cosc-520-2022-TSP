@@ -91,11 +91,22 @@ Algorithm 2 MST Branch and Bound for TSP
 
 ### Installation instruction for this algorithm. 
 
+Under the project directory, follow the instructions below to setup the environment for B&B visualization 
+
+Install node.js, which includes NPM package manager for the javascript. See [here](https://nodejs.org/en/download/)
 > brew install npm
 
+After install the node.js, you can check if the NPM is also installed successfully by
+> npm version
+
+Install the package for graph processing.
 > npm install js-graph-algorithms
 
+Install the package for deep clone the graph.
 > npm install lodash
+
+Once you go through the installation instruction, you can open the $jsgraph_BB_TSP_Visualization.html$ with Safari or Chrome web browser.
+
 ---
 ### **Reference and Sources**
 
