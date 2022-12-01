@@ -1,10 +1,8 @@
-## **Introduction**
-The travelling salesman problem is a canonical computational problem and gained intense
-research interest over the decades. We will state the travelling salesman problem along with
-some terminologies here, along with some preliminary analysis of the algorithm
+### **Intro**
+
+This repo is for the final project of COSP 520 2022 Winter Term 1. We are doing something about the Traveling Salesman Problem. 
 
 ---
-
 ## **The Dynamic Programming Algorithm for TSP**
 
 We define a graph $G = (V, E)$, a weighted undirected graph, then we consider the recursive table: 
@@ -51,7 +49,6 @@ At the heart of the method, we'll see one of the things we keep track of is the 
 To sum up, it stepwise enumerates all the possible candidate solutions by exploring the search space by the means of a decision tree.
 In each node, we will branch and constraint to achieve the sub-problem in the next level, and we will calculate the bound of the following splitted node to see if the feasible solution is better than the solution we found so far to decide whether to update the best solution. 
 
-
 The notation of the algorithm is as followed:
 
  * $G = (V,E)$ the input undirected graph of TSP.
@@ -92,8 +89,6 @@ Algorithm 2 MST Branch and Bound for TSP
 
 ##
 
-
-
 ### Installation instruction for this algorithm. 
 
 (npm libs) lodash, jest, jest-regex-util , python(for python httpserver, ...)
@@ -115,3 +110,4 @@ We make use of other sources to suppport our project:
 5. [JS Graph And graph Algorithm](https://github.com/dagrejs/graphlib/wiki#browser-scripts)
 
 6. [Lodash modular utilities.](https://www.jsdelivr.com/package/npm/lodash)
+
