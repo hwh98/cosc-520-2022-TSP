@@ -1,4 +1,4 @@
-### **Intro**
+### **Introduction**
 
 This repo is for the final project of COSP 520 2022 Winter Term 1. We are doing something about the Traveling Salesman Problem. 
 
@@ -33,10 +33,6 @@ And the main part of the algorithm started like:
 #### **Subsets Generator**
 
 * Encode each of the subset of a set of size $n$ into an integer in $[0, 2^n]$. 
-
-### **Implementations Issues and How they Are Addressed**
-
-* 
 
 ---
 ## **The Branch and Bound Algorithm with Minimum Spanning Tree for TSP**
@@ -91,7 +87,25 @@ Algorithm 2 MST Branch and Bound for TSP
 
 ### Installation instruction for this algorithm. 
 
-(npm libs) lodash, jest, jest-regex-util , python(for python httpserver, ...)
+Under the project directory, follow the instructions below to setup the environment for Branch and Bound visualization 
+
+Install node.js, which includes NPM package manager for the javascript, from [here](https://nodejs.org/en/download/)
+
+For windows operating system, download the file and follow the instruction [here](https://phoenixnap.com/kb/install-node-js-npm-on-windows)
+
+For Mac user, you can either download the file and follow the [instruction](https://radixweb.com/blog/installing-npm-and-nodejs-on-windows-and-mac), or you can install it with homebrew.
+> brew install node
+
+After install the node.js, you can check if the NPM is also installed successfully by
+> npm version
+
+Install the package for graph processing.
+> npm install js-graph-algorithms
+
+Install the package for deep cloning the graph.
+> npm install lodash
+
+Once you go through the installation instructions, you can open the jsgraph_BB_TSP_Visualization.html with Safari or Chrome web browser.
 
 ---
 ### **Reference and Sources**
@@ -101,7 +115,7 @@ Algorithm 2 MST Branch and Bound for TSP
 
 2. Jon Kleinberg and Éva Tardos. Algorithm design. MTM, 2022
 
-We make use of other sources to suppport our project:
+Referenced library and package:
 
 3. [JS graph algorithms](https://github.com/chen0040/js-graph-algorithms)
 

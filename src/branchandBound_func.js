@@ -12,7 +12,8 @@ var numofmstTree=0;// number of mst tree.
  * @returns {numofmstTree} is the number of MST.
  */
 function branchandBound(bb_g){ //bb_g is the global original graph.
-    origin_g = _.cloneDeep(bb_g)
+    origin_g = _.cloneDeep(bb_g) // https://www.jsdelivr.com/package/npm/lodash
+    // The MIT License :  https://github.com/lodash/lodash/blob/master/LICENSE
     numofvertex = bb_g.V;
 
     // MST
@@ -58,7 +59,7 @@ function branchandBound(bb_g){ //bb_g is the global original graph.
     }    
     //console.log("The overall tour for TSP ", glob_tour)
     //console.log("Cost " + glob_lowerbound)
-    console.log("# of MST tree:" + numofmstTree)
+    //console.log("# of MST tree:" + numofmstTree)
     return [glob_tour, glob_lowerbound, numofmstTree]
 }
 
