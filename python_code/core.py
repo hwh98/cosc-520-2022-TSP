@@ -161,7 +161,6 @@ class SimpleEuclideanPoints:
         :return:
             the instance itself.
         """
-        # TODO: Test this functions.
         assert vertices is not None, "Can't plot None, please check what you passed into visualize_subgraph. "
         coordxs = []
         coordys = []
