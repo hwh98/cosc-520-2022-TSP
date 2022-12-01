@@ -59,7 +59,7 @@ function branchandBound(bb_g){ //bb_g is the global original graph.
     }    
     //console.log("The overall tour for TSP ", glob_tour)
     //console.log("Cost " + glob_lowerbound)
-    console.log("# of MST tree:" + numofmstTree)
+    //console.log("# of MST tree:" + numofmstTree)
     return [glob_tour, glob_lowerbound, numofmstTree]
 }
 
