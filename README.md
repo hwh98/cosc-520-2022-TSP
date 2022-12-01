@@ -91,8 +91,11 @@ Algorithm 2 MST Branch and Bound for TSP
 
 ### Installation instruction for this algorithm. 
 
-(npm libs) lodash, jest, jest-regex-util , python(for python httpserver, ...)
+> brew install npm
 
+> npm install js-graph-algorithms
+
+> npm install lodash
 ---
 ### **Reference and Sources**
 
